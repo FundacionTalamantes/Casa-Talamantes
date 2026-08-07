@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brandbook — Casa Talamantes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary:        #8B4513;
+      --primary-dark:   #6B3410;
+      --primary-light:  #A85520;
+      --gold:           #D4A853;
+      --gold-light:     #E8C27A;
+      --green:          #2C5F2E;
+      --green-light:    #3A7A3D;
+      --bg:             #FAF7F2;
+      --bg-warm:        #F5EFE6;
+      --bg-dark:        #1C0F08;
+      --text:           #1A1A1A;
+      --muted:          #5A5047;
+      --border:         #DDD0C0;
+      --font-d: 'Playfair Display', Georgia, serif;
+      --font-b: 'Inter', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body { font-family: var(--font-b); background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar {
+      position: fixed; top: 0; left: 0; bottom: 0; width: 210px;
+      background: var(--bg-dark); border-right: 1px solid rgba(212,168,83,.12);
+      padding: 1.75rem 1.25rem; display: flex; flex-direction: column; gap: .2rem;
+      overflow-y: auto; z-index: 100;
+    }
+    .s-logo { display: flex; align-items: center; gap: .55rem; margin-bottom: 1.75rem; }
+    .s-logo img { height: 34px; filter: brightness(0) invert(1); }
+    .s-logo-text { font-family: var(--font-d); font-size: .88rem; font-weight: 700; color: var(--bg); line-height: 1.2; }
+    .s-logo-sub  { font-size: .55rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-top: 3px; }
+    .s-group { margin: 1rem 0 .2rem; font-size: .55rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(250,247,242,.28); padding-left: .4rem; }
+    .sidebar a { display: block; padding: .35rem .4rem; font-size: .78rem; color: rgba(250,247,242,.52); text-decoration: none; border-radius: 3px; transition: .2s; }
+    .sidebar a:hover { color: var(--gold); background: rgba(212,168,83,.07); }
+
+    /* ─── MAIN ─── */
+    .main { margin-left: 210px; padding: 0 3rem 6rem; max-width: 1100px; }
+
+    /* ─── COVER ─── */
+    .cover {
+      margin: 0 -3rem 4rem;
+      position: relative; overflow: hidden;
+      min-height: 82vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 4rem 3rem;
+    }
+    .cover__photo {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: url('Fotos/compressed/header.jpg');
+      background-size: cover;
+      background-position: center 40%;
+    }
+    .cover__photo::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(18, 9, 4, 0.48);
+    }
+    .cover-title {
+      font-family: var(--font-d); font-weight: 400; color: #fff;
+      font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+      text-transform: uppercase; letter-spacing: .18em;
+      text-align: center; line-height: 1;
+      white-space: nowrap;
+      position: relative; z-index: 2; margin-bottom: 1.1rem;
+    }
+    .cover-tagline {
+      font-size: .75rem; font-weight: 500;
+      letter-spacing: .28em; text-transform: uppercase;
+      color: rgba(255,255,255,.72); text-align: center;
+      position: relative; z-index: 2;
+    }
+    .cover-label {
+      position: absolute; bottom: 2.25rem; right: 3rem; z-index: 2;
+      font-size: .68rem; font-weight: 500;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+    }
+
+    /* ─── SECTION ─── */
+    .sec { padding-top: 4rem; margin-bottom: 4.5rem; }
+    .sec-head { display: flex; align-items: baseline; gap: .9rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border); margin-bottom: 2.25rem; }
+    .sec-num { font-family: var(--font-d); font-size: 1.3rem; color: var(--gold); font-weight: 700; min-width: 1.8rem; }
+    .sec-title { font-family: var(--font-d); font-size: 1.3rem; font-weight: 600; color: var(--text); }
+    .bb-body { font-size: .9rem; color: var(--muted); line-height: 1.85; max-width: 680px; margin-bottom: 1.4rem; }
+    .lbl { font-size: .62rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: .7rem; }
+    .note { background: var(--bg-warm); border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem 1.4rem; font-size: .8rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+    .note strong { color: var(--text); font-weight: 600; }
+
+    /* ─── LOGO ─── */
+    .logo-showcase { display: flex; flex-direction: row; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 2rem; }
+    .logo-cell { flex: 1; min-width: 0; padding: 2.5rem 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; border-right: 1px solid var(--border); }
+    .logo-cell:last-child { border-right: none; }
+    .logo-cell img { height: 64px; }
+    .logo-cell-cap { font-size: .62rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+    .logo-cell--dark { background: var(--bg-dark); }
+    .logo-cell--dark .logo-cell-cap { color: rgba(250,247,242,.38); }
+    .logo-cell--warm { background: var(--bg-warm); }
+
+    .logo-nope { display: flex; flex-direction: row; gap: 1rem; }
+    .logo-nope-item { flex: 1; min-width: 0; border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem 1rem; text-align: center; position: relative; }
+    .x-badge { position: absolute; top: .5rem; right: .5rem; width: 18px; height: 18px; background: #B91C1C; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .6rem; color: #fff; font-weight: 700; }
+    .logo-nope-item img { height: 44px; margin: 0 auto .65rem; }
+    .logo-nope-item p { font-size: .68rem; color: var(--muted); line-height: 1.5; }
+
+    /* ─── PALETTE ─── */
+    .palette { display: grid; grid-template-columns: repeat(4,1fr); gap: .9rem; margin-bottom: 2rem; }
+    .swatch { border-radius: 9px; overflow: hidden; border: 1px solid var(--border); }
+    .swatch-chip { height: 88px; }
+    .swatch-info { padding: .75rem .9rem .9rem; background: #fff; }
+    .swatch-name { font-size: .75rem; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+    .swatch-hex  { font-size: .7rem; color: var(--muted); font-family: 'SF Mono','Fira Code',monospace; }
+    .swatch-role { font-size: .65rem; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+
+    /* ─── TYPOGRAPHY ─── */
+    .type-specimen { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 1.5rem; }
+    .type-row { display: grid; grid-template-columns: 170px 1fr; border-bottom: 1px solid var(--border); }
+    .type-row:last-child { border-bottom: none; }
+    .type-meta { padding: 1.25rem; background: var(--bg-warm); border-right: 1px solid var(--border); }
+    .type-meta-role { font-size: .6rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+    .type-meta-spec { font-size: .68rem; color: var(--muted); line-height: 1.55; }
+    .type-sample { padding: 1.25rem 1.75rem; background: #fff; display: flex; align-items: center; }
+
+    /* ─── COMPONENTS ─── */
+    .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2rem; }
+    .comp-box { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .comp-demo { padding: 2.25rem 1.75rem; display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; min-height: 110px; }
+    .comp-demo--dark { background: var(--bg-dark); }
+    .comp-demo--warm { background: var(--bg-warm); }
+    .comp-spec { padding: 1.1rem 1.4rem; background: #fff; border-top: 1px solid var(--border); }
+    .comp-spec-title { font-size: .75rem; font-weight: 700; color: var(--text); margin-bottom: .3rem; }
+    .comp-spec-body  { font-size: .7rem; color: var(--muted); line-height: 1.6; }
+
+    /* Demo buttons */
+    .dbtn { display: inline-flex; align-items: center; gap: 7px; padding: .8rem 1.75rem; font-family: var(--font-b); font-size: .88rem; font-weight: 600; border-radius: 4px; border: none; cursor: pointer; transition: all .25s; letter-spacing: .03em; }
+    .dbtn-gold   { background: var(--gold); color: var(--bg-dark); }
+    .dbtn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(212,168,83,.3); }
+    .dbtn-ghost  { background: transparent; color: var(--bg); border: 1.5px solid rgba(250,247,242,.4); }
+    .dbtn-ghost:hover { border-color: rgba(250,247,242,.8); background: rgba(250,247,242,.07); }
+    .dbtn-green  { background: var(--green); color: var(--bg); }
+    .dbtn-green:hover { background: var(--green-light); transform: translateY(-2px); }
+    .badge { display: inline-block; font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); background: rgba(212,168,83,.12); padding: 3px 10px; border-radius: 99px; }
+
+    /* Demo card */
+    .dcard { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.1rem 1.35rem; max-width: 230px; box-shadow: 0 2px 16px rgba(28,25,23,.07); }
+    .dcard-img { height: 100px; border-radius: 7px; background: linear-gradient(135deg, var(--bg-warm) 0%, var(--border) 100%); margin-bottom: .9rem; }
+    .dcard h4 { font-family: var(--font-d); font-size: .95rem; font-weight: 400; color: var(--text); margin-bottom: .4rem; }
+    .dcard p  { font-size: .74rem; color: var(--muted); line-height: 1.55; }
+
+    /* Stats */
+    .dstats { background: var(--primary); border-radius: 9px; display: grid; grid-template-columns: repeat(3,1fr); overflow: hidden; width: 100%; }
+    .dstat  { background: var(--primary); padding: 1.25rem 1rem; text-align: center; }
+    .dstat-num { font-family: var(--font-d); font-size: 1.9rem; font-weight: 700; color: var(--gold); line-height: 1; }
+    .dstat-lbl { font-size: .68rem; color: rgba(250,247,242,.72); letter-spacing: .05em; margin-top: 3px; }
+
+    /* Progress */
+    .dprog { width: 100%; max-width: 300px; }
+    .dprog-row { margin-bottom: 10px; }
+    .dprog-hd  { display: flex; justify-content: space-between; font-size: .7rem; color: var(--muted); margin-bottom: 5px; }
+    .dprog-track { height: 8px; background: rgba(139,69,19,.15); border-radius: 4px; overflow: hidden; }
+    .dprog-fill  { height: 100%; border-radius: 4px; background: linear-gradient(90deg,var(--primary-light),var(--gold)); }
+
+    /* Form */
+    .dform { width: 100%; max-width: 270px; }
+    .dform label { display: block; font-size: .68rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .dform input { width: 100%; padding: .65rem .9rem; border: 1.5px solid var(--border); border-radius: 4px; font-family: var(--font-b); font-size: .85rem; color: var(--text); background: #fff; outline: none; margin-bottom: .9rem; transition: border-color .2s; }
+    .dform input:focus { border-color: var(--primary); }
+
+    /* ─── SPACING TABLE ─── */
+    .sp-table { width: 100%; border-collapse: collapse; font-size: .8rem; margin-bottom: 1.75rem; }
+    .sp-table th { text-align: left; font-size: .6rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); padding: .6rem .9rem; border-bottom: 2px solid var(--border); background: var(--bg-warm); }
+    .sp-table td { padding: .7rem .9rem; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: middle; }
+    .sp-table tr:last-child td { border-bottom: none; }
+    .sp-bar { display: inline-block; height: 9px; background: var(--gold); border-radius: 2px; opacity: .65; vertical-align: middle; }
+    .sp-table code { font-family: 'SF Mono','Fira Code',monospace; font-size: .72rem; background: var(--bg-warm); padding: 2px 5px; border-radius: 3px; color: var(--primary); }
+
+    /* ─── TONE ─── */
+    .tone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2rem; }
+    .tone-box { border-radius: 9px; padding: 1.35rem; }
+    .tone-do   { background: rgba(44,95,46,.07); border: 1px solid rgba(44,95,46,.22); }
+    .tone-dont { background: rgba(185,28,28,.05); border: 1px solid rgba(185,28,28,.18); }
+    .tone-head { font-size: .6rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; margin-bottom: .9rem; }
+    .tone-do   .tone-head { color: var(--green); }
+    .tone-dont .tone-head { color: #B91C1C; }
+    .tone-box ul { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+    .tone-box li { font-size: .8rem; color: var(--muted); padding-left: 1.2rem; position: relative; line-height: 1.5; }
+    .tone-box li::before { content: '—'; position: absolute; left: 0; font-weight: 600; }
+    .tone-do   li::before { color: var(--green); }
+    .tone-dont li::before { color: #B91C1C; }
+
+    /* ─── ANTI-PATTERNS ─── */
+    .ap-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: .9rem; margin-bottom: 2rem; }
+    .ap-item { background: rgba(185,28,28,.04); border: 1px solid rgba(185,28,28,.15); border-radius: 7px; padding: 1.1rem; }
+    .ap-tag  { font-size: .58rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #B91C1C; margin-bottom: .45rem; }
+    .ap-rule { font-size: .8rem; color: var(--text); font-weight: 600; margin-bottom: .3rem; line-height: 1.35; }
+    .ap-why  { font-size: .7rem; color: var(--muted); line-height: 1.5; }
+
+    /* ─────────────────────────────────────────
+       REDES SOCIALES
+    ───────────────────────────────────────── */
+
+    /* Grid de formatos */
+    .social-formats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-bottom: 2.5rem; align-items: start; }
+
+    /* Post cuadrado 1:1 */
+    .post-square {
+      aspect-ratio: 1/1;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background: var(--bg-dark);
+      box-shadow: 0 4px 24px rgba(0,0,0,.18);
+    }
+    .post-square__bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .post-square__overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to top, rgba(14,7,3,.88) 0%, rgba(14,7,3,.15) 60%, transparent 100%);
+    }
+    .post-square__content { position: relative; z-index: 2; padding: 1.1rem; }
+    .post-tag { font-size: .55rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .5rem; }
+    .post-headline { font-family: var(--font-d); font-size: 1.05rem; font-weight: 400; color: #fff; line-height: 1.2; margin-bottom: .5rem; }
+    .post-sub { font-size: .65rem; color: rgba(255,255,255,.65); line-height: 1.5; margin-bottom: .7rem; }
+    .post-logo { display: flex; align-items: center; gap: .4rem; }
+    .post-logo img { height: 18px; filter: brightness(0) saturate(100%) invert(72%) sepia(40%) saturate(600%) hue-rotate(5deg) brightness(105%); }
+    .post-logo-txt { font-family: var(--font-d); font-size: .6rem; font-weight: 700; color: var(--gold); }
+
+    /* Stat post */
+    .post-stat {
+      aspect-ratio: 1/1;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--bg-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem;
+      position: relative;
+      box-shadow: 0 4px 24px rgba(0,0,0,.18);
+    }
+    .post-stat::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 40%, rgba(139,69,19,.35) 0%, transparent 65%);
+    }
+    .post-stat > * { position: relative; z-index: 1; }
+    .stat-big { font-family: var(--font-d); font-size: 4rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: .2rem; }
+    .stat-desc { font-size: .75rem; color: rgba(250,247,242,.7); line-height: 1.5; max-width: 140px; margin: 0 auto .9rem; }
+    .stat-divider { width: 32px; height: 2px; background: var(--gold); border-radius: 2px; margin: .6rem auto; }
+    .stat-brand { font-size: .6rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(250,247,242,.4); }
+
+    /* Quote post */
+    .post-quote {
+      aspect-ratio: 1/1;
+      border-radius: 10px;
+      background: var(--bg-warm);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.25rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,.07);
+    }
+    .quote-mark { font-family: var(--font-d); font-size: 3.5rem; color: var(--gold); line-height: .7; opacity: .5; }
+    .quote-text { font-family: var(--font-d); font-size: .92rem; font-style: italic; color: var(--text); line-height: 1.5; flex: 1; padding: .25rem 0 .75rem; }
+    .quote-rule { width: 32px; height: 2px; background: var(--primary); border-radius: 2px; margin-bottom: .6rem; }
+    .quote-attr { font-size: .62rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+    /* Story 9:16 */
+    .post-story {
+      aspect-ratio: 9/16;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-dark);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.25rem;
+      position: relative;
+      box-shadow: 0 4px 24px rgba(0,0,0,.22);
+    }
+    .post-story__bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: linear-gradient(165deg, #3A1A08 0%, #1C0F08 40%, rgba(44,95,46,.25) 100%);
+    }
+    .post-story__top { position: relative; z-index: 1; display: flex; align-items: center; gap: .5rem; }
+    .post-story__top img { height: 22px; filter: brightness(0) invert(1); }
+    .post-story__brand { font-family: var(--font-d); font-size: .75rem; font-weight: 700; color: var(--bg); }
+    .post-story__mid { position: relative; z-index: 1; text-align: center; }
+    .post-story__tag { font-size: .55rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .6rem; }
+    .post-story__title { font-family: var(--font-d); font-size: 1.35rem; font-weight: 400; color: #fff; line-height: 1.2; margin-bottom: .6rem; }
+    .post-story__body { font-size: .65rem; color: rgba(250,247,242,.65); line-height: 1.6; }
+    .post-story__bot { position: relative; z-index: 1; }
+    .post-story__cta { width: 100%; padding: .65rem; background: var(--gold); color: var(--bg-dark); font-family: var(--font-b); font-size: .72rem; font-weight: 700; border-radius: 4px; border: none; text-align: center; letter-spacing: .05em; }
+
+    /* Horizontal banner */
+    .post-banner {
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--bg-dark);
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      min-height: 200px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.18);
+    }
+    .post-banner__left {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, #3A1A08 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .post-banner__logo { display: flex; align-items: center; gap: .45rem; margin-bottom: .9rem; }
+    .post-banner__logo img { height: 26px; filter: brightness(0) invert(1); }
+    .post-banner__logo-name { font-family: var(--font-d); font-size: .8rem; font-weight: 700; color: var(--bg); }
+    .post-banner__title { font-family: var(--font-d); font-size: 1rem; font-weight: 400; color: #fff; line-height: 1.25; margin-bottom: .4rem; }
+    .post-banner__sub { font-size: .65rem; color: rgba(250,247,242,.6); line-height: 1.5; }
+    .post-banner__right {
+      background: var(--bg-warm);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1.5rem;
+      gap: .65rem;
+    }
+    .post-banner__stat { display: flex; align-items: baseline; gap: .5rem; }
+    .post-banner__num { font-family: var(--font-d); font-size: 1.75rem; font-weight: 700; color: var(--primary); line-height: 1; }
+    .post-banner__lbl { font-size: .68rem; color: var(--muted); line-height: 1.4; }
+    .post-banner__divider { width: 100%; height: 1px; background: var(--border); }
+
+    /* Format labels */
+    .format-label { font-size: .65rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); margin-bottom: .75rem; text-align: center; }
+
+    /* Social format containers */
+    .social-square-col { display: flex; flex-direction: column; gap: 1.25rem; }
+    .social-story-col  { display: flex; flex-direction: column; }
+
+    /* Social guidelines */
+    .social-guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2rem; }
+    .social-guide-item { border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem 1.25rem; }
+    .social-guide-item h4 { font-size: .78rem; font-weight: 700; color: var(--text); margin-bottom: .35rem; }
+    .social-guide-item p  { font-size: .72rem; color: var(--muted); line-height: 1.6; }
+    .social-guide-item ul { font-size: .72rem; color: var(--muted); line-height: 1.6; padding-left: 1rem; }
+    .social-guide-item li { margin-bottom: .25rem; }
+
+    /* Color accent headings */
+    .social-guide-item.guide-do   { border-left: 3px solid var(--green); }
+    .social-guide-item.guide-dont { border-left: 3px solid #B91C1C; }
+    .social-guide-item.guide-tip  { border-left: 3px solid var(--gold); }
+
+    /* ─────────────────────────────────────────
+       EJEMPLOS ADICIONALES POR PLATAFORMA
+    ───────────────────────────────────────── */
+
+    /* LinkedIn */
+    .post-linkedin { border-radius: 10px; background: #fff; border: 1px solid #dde; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.07); }
+    .post-linkedin__header { padding: .9rem 1rem .6rem; display: flex; align-items: flex-start; gap: .65rem; }
+    .li-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--bg-dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .li-avatar img { height: 22px; filter: brightness(0) invert(1); }
+    .li-name { font-size: .8rem; font-weight: 700; color: rgba(0,0,0,.9); line-height: 1.2; }
+    .li-meta { font-size: .68rem; color: rgba(0,0,0,.48); line-height: 1.5; }
+    .post-linkedin__body { padding: 0 1rem .75rem; font-size: .78rem; color: rgba(0,0,0,.8); line-height: 1.65; }
+    .post-linkedin__img { width: 100%; aspect-ratio: 1.91/1; background: linear-gradient(rgba(14,7,3,.52),rgba(14,7,3,.52)),url('Fotos/compressed/restauracion.jpg') center/cover; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; padding: 1.5rem; gap: .4rem; position: relative; }
+    .post-linkedin__actions { padding: .55rem 1rem; display: flex; gap: .9rem; border-top: 1px solid #dde; }
+    .li-action { font-size: .7rem; color: rgba(0,0,0,.48); font-weight: 600; }
+
+    /* Twitter / X */
+    .post-twitter { border-radius: 10px; background: #000; border: 1px solid #2f3336; padding: 1rem; box-shadow: 0 2px 12px rgba(0,0,0,.3); }
+    .post-twitter__header { display: flex; align-items: flex-start; gap: .65rem; margin-bottom: .65rem; }
+    .tw-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--bg-dark); border: 1px solid #333; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .tw-avatar img { height: 18px; filter: brightness(0) invert(1); }
+    .tw-name { font-size: .8rem; font-weight: 700; color: #fff; }
+    .tw-handle { font-size: .72rem; color: #71767b; }
+    .post-twitter__body { font-size: .82rem; color: #e7e9ea; line-height: 1.65; margin-bottom: .75rem; }
+    .tw-card { border-radius: 8px; border: 1px solid #2f3336; overflow: hidden; }
+    .tw-card-img { aspect-ratio: 1.91/1; background: linear-gradient(rgba(14,7,3,.48),rgba(14,7,3,.48)),url('Fotos/compressed/aula-principal.jpg') center/cover; display: flex; align-items: center; justify-content: center; padding: 1rem; text-align: center; position: relative; }
+    .tw-card-foot { background: #16181c; padding: .55rem .8rem; }
+    .tw-card-domain { font-size: .68rem; color: #71767b; }
+    .tw-card-title { font-size: .78rem; font-weight: 700; color: #e7e9ea; line-height: 1.3; }
+    .post-twitter__actions { display: flex; gap: 1.25rem; margin-top: .65rem; }
+    .tw-action { font-size: .7rem; color: #71767b; }
+
+    /* Carrusel */
+    .carousel-slides { display: grid; grid-template-columns: repeat(3,1fr); gap: .75rem; margin-bottom: 1.75rem; }
+    .carousel-slide { aspect-ratio: 1/1; border-radius: 9px; overflow: hidden; position: relative; background: var(--bg-dark); }
+    .carousel-num { position: absolute; top: .55rem; right: .65rem; font-size: .52rem; font-weight: 700; color: rgba(255,255,255,.5); z-index: 3; font-family: var(--font-b); }
+
+    /* TikTok / Reels */
+    .post-tiktok { aspect-ratio: 9/16; border-radius: 12px; overflow: hidden; background: #000; position: relative; box-shadow: 0 4px 28px rgba(0,0,0,.45); }
+    .tiktok-bg { position: absolute; inset: 0; z-index: 0; background: url('Fotos/compressed/DJI_0784.jpg') center/cover; }
+    .tiktok-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top,rgba(0,0,0,.85) 0%,transparent 52%); }
+    .tiktok-nav { position: absolute; top: .9rem; left: 0; right: 0; z-index: 3; display: flex; align-items: center; justify-content: center; gap: 1.25rem; }
+    .tiktok-tab { font-size: .7rem; color: rgba(255,255,255,.5); font-weight: 500; }
+    .tiktok-tab--active { color: #fff; font-weight: 700; border-bottom: 1.5px solid #fff; padding-bottom: 1px; }
+    .tiktok-side { position: absolute; right: .65rem; bottom: 4.5rem; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 1.1rem; }
+    .tiktok-action { display: flex; flex-direction: column; align-items: center; gap: .18rem; }
+    .tiktok-action span { font-size: .55rem; color: #fff; }
+    .tiktok-bottom { position: absolute; bottom: 0; left: 0; right: 2.8rem; z-index: 3; padding: .75rem .85rem 1rem; }
+    .tiktok-handle { font-size: .72rem; font-weight: 700; color: #fff; margin-bottom: .3rem; }
+    .tiktok-caption { font-size: .65rem; color: rgba(255,255,255,.85); line-height: 1.5; margin-bottom: .35rem; }
+    .tiktok-tags { font-size: .6rem; color: rgba(255,255,255,.9); font-weight: 600; }
+    .tiktok-music { font-size: .58rem; color: rgba(255,255,255,.6); display: flex; align-items: center; gap: .3rem; margin-top: .3rem; }
+
+    /* Instagram Profile Grid */
+    .ig-profile { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    .ig-profile-header { background: #fff; border-bottom: 1px solid var(--border); padding: .75rem 1rem; display: flex; align-items: center; gap: .75rem; }
+    .ig-ava { width: 44px; height: 44px; border-radius: 50%; background: var(--bg-dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ig-ava img { height: 24px; filter: brightness(0) invert(1); }
+    .ig-profile-name { font-size: .82rem; font-weight: 700; color: #000; }
+    .ig-profile-bio  { font-size: .7rem; color: #555; line-height: 1.5; }
+    .ig-grid-cells { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--border); }
+    .ig-cell { aspect-ratio: 1/1; position: relative; overflow: hidden; }
+
+    /* Layout helpers */
+    .platform-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2rem; align-items: start; }
+    .platform-col  { display: flex; flex-direction: column; }
+    .tiktok-ig-duo { display: grid; grid-template-columns: 1fr 2.2fr; gap: 1.25rem; align-items: start; margin-bottom: 2rem; }
+
+    @media print {
+      .platform-duo { gap: .6rem; }
+      /* TikTok + Instagram Grid — wrapper de página aislada */
+      .tiktok-page {
+        page-break-before: always;
+        page-break-after: always;
+        page-break-inside: avoid;
+        height: calc(210mm - 2.8cm);
+        overflow: hidden;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      /* Columna IG más estrecha: celda-cuadrada(≈207px)×3 + gaps ≈ 625px, cabe en 688px de alto */
+      .tiktok-ig-duo { gap: .6rem; height: 100% !important; margin: 0 !important; align-items: stretch; grid-template-columns: 1fr 1.7fr !important; }
+      /* Ocultar labels de formato — ocupan espacio que rompe height: 100% */
+      .tiktok-ig-duo .format-label { display: none !important; }
+      .post-tiktok { aspect-ratio: unset !important; height: 100% !important; }
+      .ig-profile { height: 100% !important; overflow: hidden; display: flex; flex-direction: column; border: none !important; }
+      /* Header compacto: avatar(44px) + padding(2×7px) = 58px exacto */
+      .ig-profile-header { padding: .5rem .75rem !important; }
+      .ig-grid-cells { flex: 1; min-height: 0; grid-auto-rows: calc((210mm - 2.8cm - 58px - 4px) / 3) !important; }
+      /* Altura y anchura explícitas para garantizar cuadrados perfectos en las 3 filas */
+      .ig-cell { aspect-ratio: unset !important; height: calc((210mm - 2.8cm - 58px - 4px) / 3) !important; }
+      /* Carruseles — página completa, dos bloques iguales */
+      .carousel-section {
+        page-break-before: always;
+        height: calc(210mm - 2.8cm);
+        overflow: hidden;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: .5rem;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      /* Cada bloque ocupa exactamente la mitad disponible */
+      .carousel-block { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+      .carousel-block .lbl { flex-shrink: 0; margin-bottom: .3rem !important; }
+      /* Ocultar descripciones */
+      .carousel-desc { display: none !important; }
+      /* Slides cuadrados: tamaño explícito = (mitad_página − label − gap) */
+      .carousel-slides {
+        flex: 1; min-height: 0;
+        gap: .4rem;
+        grid-template-columns: repeat(3, calc((210mm - 2.8cm - .5rem - 24px) / 2)) !important;
+      }
+      .carousel-slide {
+        aspect-ratio: unset !important;
+        height: calc((210mm - 2.8cm - .5rem - 24px) / 2) !important;
+      }
+      /* Altura fija para las imágenes — más confiable que aspect-ratio en print */
+      .post-linkedin__img { aspect-ratio: unset !important; height: 110px !important; }
+      .tw-card-img       { aspect-ratio: unset !important; height: 110px !important; }
+      .post-linkedin__body { font-size: .72rem !important; }
+      .post-twitter__body  { font-size: .75rem !important; }
+      .post-linkedin__header,
+      .post-twitter__header { padding: .65rem .8rem .45rem !important; }
+    }
+
+    /* ─── FOOTER ─── */
+    .bb-foot {
+      background: var(--primary); margin: 5rem -3rem -6rem; padding: 2.5rem 3rem;
+      border-top: 1px solid rgba(212,168,83,.18); display: flex; justify-content: space-between;
+      align-items: center; gap: 2rem; flex-wrap: wrap;
+    }
+    .bb-foot p { font-size: .72rem; color: rgba(250,247,242,.6); }
+    .bb-foot-v { font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+
+    /* ─────────────────────────────────────────
+       PRINT / PDF
+    ───────────────────────────────────────── */
+    @media print {
+      @page {
+        size: A4 landscape;
+        margin: 1.4cm 1.6cm;
+      }
+
+      @page :first {
+        margin: 0;
+      }
+
+      html, body { margin: 0 !important; padding: 0 !important; }
+      .sidebar { display: none !important; }
+      .main { margin: 0 !important; padding: 0 !important; max-width: none !important; width: 100% !important; overflow: visible !important; }
+
+      /* Cover — página completa sin bordes */
+      .cover { margin: 0 !important; padding: 0 !important; width: 100% !important; max-width: 100% !important; height: 100vh !important; min-height: 0 !important; overflow: hidden !important; page-break-after: always; }
+      .cover__photo { background-position: center 35% !important; }
+      .cover-title { font-size: 4.8rem !important; letter-spacing: .18em !important; white-space: nowrap !important; }
+      .cover-label { right: 2.5rem !important; bottom: 2rem !important; }
+
+      /* Break sections cleanly */
+      .sec { page-break-inside: avoid; padding-top: 2rem; }
+      .sec-head { margin-bottom: 1.25rem; }
+
+      /* Don't break inside component boxes */
+      .comp-box, .swatch, .ap-item, .tone-box { page-break-inside: avoid; }
+
+      /* Logo showcase — mantener 3 columnas horizontales */
+      .logo-showcase { display: flex !important; flex-direction: row !important; page-break-inside: avoid; }
+      .logo-cell { flex: 1 !important; min-width: 0 !important; padding: 2rem 1rem !important; }
+      .logo-cell img { height: 54px !important; }
+
+      /* Usos no permitidos — mantener 3 columnas horizontales */
+      .logo-nope { display: flex !important; flex-direction: row !important; page-break-inside: avoid; }
+      .logo-nope-item { flex: 1 !important; min-width: 0 !important; }
+
+      /* Compact font for print */
+      body  { font-size: 14px !important; }
+      .lbl  { font-size: 7px !important; }
+      .note { padding: .8rem 1.1rem; }
+
+      /* Grids stay put */
+      .palette { gap: .6rem; }
+      .ap-grid  { gap: .6rem; }
+
+      /* Social section */
+      .social-formats { gap: 1rem; }
+      .post-square, .post-stat, .post-quote { border-radius: 7px; }
+
+      /* Footer */
+      .bb-foot { margin: 3rem 0 0 !important; }
+
+      /* Página 11: tabla + footer — flexbox column que llena la hoja */
+      .dimensions-final {
+        page-break-before: always;
+        height: calc(210mm - 2.8cm);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      /* Footer al ras del borde inferior — compensa los márgenes de página */
+      .dimensions-final .bb-foot {
+        margin: 0 -1.6cm !important;
+        padding: 2.5rem 1.6cm !important;
+        border-radius: 0 !important;
+      }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 820px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; padding: 0 1.5rem 5rem; }
+      .cover { margin: 0 -1.5rem 3rem; padding: 4rem 1.5rem 3rem; }
+      .palette, .ap-grid { grid-template-columns: 1fr 1fr; }
+      .comp-grid, .tone-grid { grid-template-columns: 1fr; }
+      .social-formats { grid-template-columns: 1fr; }
+      .logo-showcase { grid-template-columns: 1fr; }
+      .logo-nope { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<aside class="sidebar">
+  <div class="s-logo">
+    <img src="Talamantes-logo.svg" alt="Logo">
+    <div>
+      <div class="s-logo-text">Casa<br>Talamantes</div>
+      <div class="s-logo-sub">Brandbook</div>
+    </div>
+  </div>
+
+  <div class="s-group">Identidad</div>
+  <a href="#logo">01 · Logotipo</a>
+  <a href="#colores">02 · Paleta de Color</a>
+
+  <div class="s-group">Sistema</div>
+  <a href="#tono">03 · Tono de Voz</a>
+
+  <div class="s-group">Aplicaciones</div>
+  <a href="#redes">04 · Redes Sociales</a>
+</aside>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- PORTADA -->
+  <div class="cover">
+    <div class="cover__photo"></div>
+    <h1 class="cover-title">Casa Talamantes</h1>
+    <p class="cover-tagline">Tejiendo Comunidad · Creando Oportunidades</p>
+    <span class="cover-label">Manual de Identidad Visual</span>
+  </div>
+
+
+  <!-- 01 LOGOTIPO -->
+  <section class="sec" id="logo">
+    <div class="sec-head"><span class="sec-num">01</span><span class="sec-title">Logotipo</span></div>
+    <p class="bb-body">El logotipo es un símbolo arquitectónico que evoca los arcos y la silueta de la hacienda histórica. Puede usarse como símbolo solo o acompañado del nombre. Se respetan zonas de protección equivalentes a la altura del símbolo en todos sus lados.</p>
+
+    <div class="lbl">Variantes aprobadas</div>
+    <div class="logo-showcase">
+      <div class="logo-cell" style="background:var(--bg);">
+        <img src="Talamantes-logo.svg" alt="" style="filter: invert(25%) sepia(40%) saturate(800%) hue-rotate(355deg) brightness(70%);">
+        <span class="logo-cell-cap">Sobre fondo claro</span>
+      </div>
+      <div class="logo-cell logo-cell--warm">
+        <img src="Talamantes-logo.svg" alt="" style="filter: invert(25%) sepia(40%) saturate(800%) hue-rotate(355deg) brightness(70%);">
+        <span class="logo-cell-cap">Sobre fondo cálido</span>
+      </div>
+      <div class="logo-cell logo-cell--dark">
+        <img src="Talamantes-logo.svg" alt="" style="filter: brightness(0) invert(1);">
+        <span class="logo-cell-cap">Sobre fondo oscuro</span>
+      </div>
+      <div class="logo-cell logo-cell--dark">
+        <img src="Talamantes-logo.svg" alt="" style="filter: brightness(0) invert(60%) sepia(1) saturate(400%) brightness(85%);">
+        <span class="logo-cell-cap">Variante dorada</span>
+      </div>
+    </div>
+
+    <div class="lbl">Usos no permitidos</div>
+    <div class="logo-nope">
+      <div class="logo-nope-item">
+        <div class="x-badge">✕</div>
+        <img src="Talamantes-logo.svg" alt="" style="filter: invert(40%) sepia(80%) saturate(400%) hue-rotate(90deg); opacity:.55;">
+        <p>No cambiar a tonos fríos o no aprobados</p>
+      </div>
+      <div class="logo-nope-item">
+        <div class="x-badge">✕</div>
+        <img src="Talamantes-logo.svg" alt="" style="filter:invert(25%) sepia(40%) saturate(800%) hue-rotate(355deg) brightness(70%); transform:scaleX(1.45); opacity:.55;">
+        <p>No deformar ni estirar las proporciones</p>
+      </div>
+      <div class="logo-nope-item">
+        <div class="x-badge">✕</div>
+        <img src="Talamantes-logo.svg" alt="" style="filter:invert(25%) sepia(40%) saturate(800%) hue-rotate(355deg) brightness(70%); opacity:.18;">
+        <p>No usar sobre fondos de bajo contraste</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 02 COLORES -->
+  <section class="sec" id="colores">
+    <div class="sec-head"><span class="sec-num">02</span><span class="sec-title">Paleta de Color</span></div>
+    <p class="bb-body">La paleta evoca la tierra adobe del desierto chihuahuense, el oro de la paja seca y el verde de los valles irrigados. Es exclusivamente cálida — nunca tonos fríos (Slate, Zinc, Blue). El terracota es el color de acción; el dorado es solo decorativo.</p>
+
+    <div class="lbl">Colores primarios</div>
+    <div class="palette">
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#8B4513;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Adobe</div>
+          <div class="swatch-hex">#8B4513</div>
+          <div class="swatch-role">CTAs, estados activos, foco, barras de progreso.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#1C0F08; border-bottom:1px solid var(--border);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Tierra Profunda</div>
+          <div class="swatch-hex">#1C0F08</div>
+          <div class="swatch-role">Fondos oscuros, nav, footer, overlays.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#FAF7F2; border-bottom:1px solid var(--border);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Lienzo Cálido</div>
+          <div class="swatch-hex">#FAF7F2</div>
+          <div class="swatch-role">Fondo principal. Nunca #FFFFFF como fondo de página.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#1A1A1A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Tinta</div>
+          <div class="swatch-hex">#1A1A1A</div>
+          <div class="swatch-role">Texto principal. Nunca negro puro #000000.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lbl">Colores de soporte</div>
+    <div class="palette">
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#D4A853;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Dorado</div>
+          <div class="swatch-hex">#D4A853</div>
+          <div class="swatch-role">Solo decorativo: líneas, iconos, números en fondo oscuro. Nunca CTA.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#2C5F2E;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Verde Valle</div>
+          <div class="swatch-hex">#2C5F2E</div>
+          <div class="swatch-role">Indicadores de impacto positivo. No como color primario de marca.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#F5EFE6; border-bottom:1px solid var(--border);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Arena</div>
+          <div class="swatch-hex">#F5EFE6</div>
+          <div class="swatch-role">Fondo de secciones alternadas.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-chip" style="background:#5A5047;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Arcilla Muted</div>
+          <div class="swatch-hex">#5A5047</div>
+          <div class="swatch-role">Texto secundario, captions, metadata.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Prohibido:</strong> Adobe + Verde Valle como colores vecinos · Blanco puro (#FFFFFF) como fondo de página · Grises fríos (Slate, Zinc) · Negro puro (#000000) · Tonos azules/púrpuras · Sombras con matiz frío.
+    </div>
+  </section>
+
+
+
+
+  <!-- 10 TONO -->
+  <section class="sec" id="tono">
+    <div class="sec-head"><span class="sec-num">03</span><span class="sec-title">Tono de Voz</span></div>
+    <p class="bb-body">Casa Talamantes habla con gravedad y calidez. La causa es urgente y el tono debe reflejarlo — sin sensacionalismo. La audiencia primaria son aliados corporativos que necesitan credibilidad; la secundaria es la comunidad que necesita sentirse vista y respetada.</p>
+    <div class="tone-grid">
+      <div class="tone-box tone-do">
+        <div class="tone-head">Hacemos esto</div>
+        <ul>
+          <li>Nombres concretos: "niños del Municipio de Allende", no "la comunidad".</li>
+          <li>Verbos de acción: "restauramos", "educamos", "abrimos".</li>
+          <li>Cifras reales y verificables. Si es meta, se dice "meta".</li>
+          <li>Urgencia sin alarmismo: "cientos de niños enfrentan la deserción".</li>
+          <li>Gratitud auténtica y específica hacia aliados.</li>
+        </ul>
+      </div>
+      <div class="tone-box tone-dont">
+        <div class="tone-head">Nunca esto</div>
+        <ul>
+          <li>Verbos vacíos: "Elevamos", "Empoderamos", "Transformamos vidas".</li>
+          <li>Números perfectos: "100% comprometidos", "99.9% transparencia".</li>
+          <li>Formalidades frías: "maximizar el impacto social".</li>
+          <li>Tono de lástima o victimización de la comunidad.</li>
+          <li>Emojis en materiales formales o impresos.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 11 ANTIPATRONES -->
+
+
+  <!-- ══════════════════════════════════
+       12 REDES SOCIALES
+  ══════════════════════════════════ -->
+  <section class="sec" id="redes">
+    <div class="sec-head"><span class="sec-num">04</span><span class="sec-title">Redes Sociales</span></div>
+    <p class="bb-body">La identidad visual se aplica con las mismas reglas de color, tipografía y tono en todos los formatos digitales. A continuación se muestran los tres formatos estándar y plantillas de referencia para cada uno.</p>
+
+    <!-- Tres columnas: square posts / story / banner -->
+<!-- ── EJEMPLOS ADICIONALES POR PLATAFORMA ── -->
+    <div class="lbl" style="margin-top:2rem;">Ejemplos por plataforma</div>
+
+    <!-- LinkedIn + Twitter/X -->
+    <div class="platform-duo">
+
+      <!-- LinkedIn -->
+      <div class="platform-col">
+        <div class="format-label">LinkedIn — Post profesional</div>
+        <div class="post-linkedin">
+          <div class="post-linkedin__header">
+            <div class="li-avatar"><img src="Talamantes-logo.svg" alt=""></div>
+            <div>
+              <div class="li-name">Casa Talamantes</div>
+              <div class="li-meta">Organización sin fines de lucro · Allende, Chihuahua · 1h</div>
+            </div>
+          </div>
+          <div class="post-linkedin__body">
+            Hoy celebramos un avance significativo: <strong>el 70% de la restauración del inmueble histórico está completado.</strong><br><br>
+            Más de 200 niños del Municipio de Allende pronto tendrán un espacio digno para estudiar, crear y crecer. Si tu organización desea sumarse, el enlace está en los comentarios.
+          </div>
+          <div class="post-linkedin__img">
+            <div style="font-size:.55rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);">Avance de obra · Junio 2026</div>
+            <div style="font-family:var(--font-d);font-size:1.35rem;color:#fff;line-height:1.2;">70% restaurado</div>
+            <div style="font-size:.6rem;color:rgba(255,255,255,.45);">casatalamantes.org</div>
+          </div>
+          <div class="post-linkedin__actions">
+            <span class="li-action">Me gusta</span>
+            <span class="li-action">Comentar</span>
+            <span class="li-action">Compartir</span>
+            <span class="li-action">Enviar</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Twitter / X -->
+      <div class="platform-col">
+        <div class="format-label">X (Twitter) — Post con tarjeta de enlace</div>
+        <div class="post-twitter">
+          <div class="post-twitter__header">
+            <div class="tw-avatar"><img src="Talamantes-logo.svg" alt=""></div>
+            <div>
+              <div class="tw-name">Casa Talamantes</div>
+              <div class="tw-handle">@CasaTalamantes · 3h</div>
+            </div>
+          </div>
+          <div class="post-twitter__body">
+            200 niños en Municipio de Allende, Chihuahua, merecen un espacio seguro para estudiar y crecer.<br><br>
+            El 70% de la restauración ya está completada. Si tu empresa puede sumarse, escríbenos.
+          </div>
+          <div class="tw-card">
+            <div class="tw-card-img">
+              <div>
+                <div style="font-family:var(--font-d);font-size:.95rem;color:#fff;line-height:1.25;margin-bottom:.3rem;">Educación y cultura<br>en Chihuahua.</div>
+                <div style="font-size:.55rem;color:rgba(255,255,255,.45);">casatalamantes.org</div>
+              </div>
+            </div>
+            <div class="tw-card-foot">
+              <div class="tw-card-domain">casatalamantes.org</div>
+              <div class="tw-card-title">Casa Talamantes — Asociación Javier Francisco Máynez A.C.</div>
+            </div>
+          </div>
+          <div class="post-twitter__actions">
+            <span class="tw-action">↩ 12</span>
+            <span class="tw-action">♻ 34</span>
+            <span class="tw-action">♥ 89</span>
+            <span class="tw-action">↗ Compartir</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carruseles — wrapper con page-break propio -->
+    <div class="carousel-section">
+
+    <div class="carousel-block">
+    <div class="lbl">Carrusel A · Campaña de aliados (1080 × 1080 c/diapositiva)</div>
+    <p class="bb-body carousel-desc" style="margin-bottom:.7rem;">El carrusel permite contar una historia en secuencia. Primera diapositiva: gancho visual fuerte. Intermedias: datos o argumentos. Última: siempre CTA claro.</p>
+    <div class="carousel-slides">
+
+      <!-- Slide 1 — portada -->
+      <div class="carousel-slide">
+        <div class="carousel-num">1 / 3</div>
+        <div style="position:absolute;inset:0;background:url('Fotos/compressed/header.jpg') center 40%/cover;"></div>
+        <div style="position:absolute;inset:0;background:rgba(14,7,3,.52);z-index:1;"></div>
+        <div style="position:absolute;inset:0;z-index:2;padding:1.1rem;display:flex;flex-direction:column;justify-content:flex-end;">
+          <div style="font-size:.5rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;">3 razones para sumarte</div>
+          <div style="font-family:var(--font-d);font-size:.88rem;color:#fff;line-height:1.25;margin-bottom:.7rem;">Conoce por qué<br><em>Casa Talamantes</em><br>necesita tu apoyo.</div>
+          <div style="display:flex;align-items:center;gap:.4rem;">
+            <img src="Talamantes-logo.svg" alt="" style="height:12px;filter:brightness(0) invert(1);">
+            <span style="font-size:.48rem;color:rgba(255,255,255,.4);">Desliza →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 — dato -->
+      <div class="carousel-slide">
+        <div class="carousel-num">2 / 3</div>
+        <div style="position:absolute;inset:0;background:url('Fotos/compressed/ninos.jpg') center/cover;"></div>
+        <div style="position:absolute;inset:0;background:rgba(139,69,19,.78);"></div>
+        <div style="position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1rem;">
+          <div style="font-size:.45rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:.3rem;">Razón #1</div>
+          <div style="font-family:var(--font-d);font-size:2.8rem;font-weight:700;color:var(--gold);line-height:1;margin-bottom:.2rem;">+200</div>
+          <div style="font-size:.62rem;color:rgba(255,255,255,.85);line-height:1.45;margin-bottom:.75rem;">niños esperan<br>un espacio seguro</div>
+          <div style="width:28px;height:2px;background:var(--gold);border-radius:2px;"></div>
+          <div style="font-size:.48rem;color:rgba(255,255,255,.48);margin-top:.45rem;letter-spacing:.1em;text-transform:uppercase;">Municipio de Allende</div>
+        </div>
+      </div>
+
+      <!-- Slide 3 — CTA -->
+      <div class="carousel-slide">
+        <div class="carousel-num" style="color:rgba(255,255,255,.6);">3 / 3</div>
+        <div style="position:absolute;inset:0;background:url('Fotos/compressed/clases.jpg') center/cover;"></div>
+        <div style="position:absolute;inset:0;background:rgba(245,239,230,.30);"></div>
+        <div style="position:absolute;inset:0;z-index:1;padding:1.1rem;display:flex;flex-direction:column;justify-content:flex-end;">
+          <div style="font-size:.48rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:.5rem;">Únete al cambio</div>
+          <div style="font-family:var(--font-d);font-size:.9rem;line-height:1.45;">
+            <span style="background:var(--gold);color:var(--bg-dark);padding:.05em .3em;-webkit-box-decoration-break:clone;box-decoration-break:clone;">Sé parte de</span><br>
+            <span style="background:var(--gold);color:var(--bg-dark);padding:.05em .3em;-webkit-box-decoration-break:clone;box-decoration-break:clone;font-style:italic;">la historia</span><br>
+            <span style="background:var(--gold);color:var(--bg-dark);padding:.05em .3em;-webkit-box-decoration-break:clone;box-decoration-break:clone;">de Talamantes.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div><!-- /.carousel-block A -->
+
+    <div class="carousel-block">
+    <div class="lbl">Carrusel B · Avance de restauración (1080 × 1080 c/diapositiva)</div>
+    <p class="bb-body carousel-desc" style="margin-bottom:.7rem;">Mismo esquema narrativo: apertura impactante, evidencia de progreso, cierre con acción concreta.</p>
+    <div class="carousel-slides">
+
+      <!-- Slide 1 — portada aérea -->
+      <div class="carousel-slide">
+        <div class="carousel-num">1 / 3</div>
+        <div style="position:absolute;inset:0;background:url('Fotos/compressed/DJI_0784.jpg') center/cover;"></div>
+        <div style="position:absolute;inset:0;background:rgba(14,7,3,.55);z-index:1;"></div>
+        <div style="position:absolute;inset:0;z-index:2;padding:1.1rem;display:flex;flex-direction:column;justify-content:flex-end;">
+          <div style="font-size:.5rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;">Avance · 2026</div>
+          <div style="font-family:var(--font-d);font-size:.88rem;color:#fff;line-height:1.25;margin-bottom:.7rem;">El futuro de<br><em>Allende</em><br>se reconstruye.</div>
+          <div style="display:flex;align-items:center;gap:.4rem;">
+            <img src="Talamantes-logo.svg" alt="" style="height:12px;filter:brightness(0) invert(1);">
+            <span style="font-size:.48rem;color:rgba(255,255,255,.4);">Desliza →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 — dato de restauración -->
+      <div class="carousel-slide">
+        <div class="carousel-num">2 / 3</div>
+        <div style="position:absolute;inset:0;background:url('Fotos/compressed/restauracion.jpg') center/cover;"></div>
+        <div style="position:absolute;inset:0;background:rgba(107,52,16,.82);"></div>
+        <div style="position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1rem;">
+          <div style="font-size:.45rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:.3rem;">Progreso real</div>
+          <div style="font-family:var(--font-d);font-size:2.8rem;font-weight:700;color:var(--gold);line-height:1;margin-bottom:.2rem;">70%</div>
+          <div style="font-size:.62rem;color:rgba(255,255,255,.85);line-height:1.45;margin-bottom:.75rem;">de la hacienda<br>ya restaurada</div>
+          <div style="width:28px;height:2px;background:var(--gold);border-radius:2px;"></div>
+          <div style="font-size:.48rem;color:rgba(255,255,255,.48);margin-top:.45rem;letter-spacing:.1em;text-transform:uppercase;">Patrimonio histórico</div>
+        </div>
+      </div>
+
+      <!-- Slide 3 — CTA aula -->
+      <div class="carousel-slide">
+        <div class="carousel-num" style="color:rgba(255,255,255,.6);">3 / 3</div>
+        <div style="position:absolute;inset:0;background:url('Fotos/compressed/aula-principal.jpg') center/cover;"></div>
+        <div style="position:absolute;inset:0;background:rgba(245,239,230,.30);"></div>
+        <div style="position:absolute;inset:0;z-index:1;padding:1.1rem;display:flex;flex-direction:column;justify-content:flex-end;">
+          <div style="font-size:.48rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:.5rem;">El aula espera</div>
+          <div style="font-family:var(--font-d);font-size:.9rem;line-height:1.45;">
+            <span style="background:var(--gold);color:var(--bg-dark);padding:.05em .3em;-webkit-box-decoration-break:clone;box-decoration-break:clone;">Ayuda a completar</span><br>
+            <span style="background:var(--gold);color:var(--bg-dark);padding:.05em .3em;-webkit-box-decoration-break:clone;box-decoration-break:clone;font-style:italic;">la obra</span><br>
+            <span style="background:var(--gold);color:var(--bg-dark);padding:.05em .3em;-webkit-box-decoration-break:clone;box-decoration-break:clone;">que cambia vidas.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div><!-- /.carousel-block B -->
+    </div><!-- /.carousel-section -->
+
+    <!-- TikTok / Reels + Instagram Grid — página propia -->
+    <div class="tiktok-page">
+    <div class="tiktok-ig-duo">
+
+      <!-- TikTok / Reels -->
+      <div>
+        <div class="format-label">TikTok / Reels (1080 × 1920)</div>
+        <div class="post-tiktok">
+          <div class="tiktok-bg"></div>
+          <div class="tiktok-overlay"></div>
+          <!-- nav top -->
+          <div class="tiktok-nav">
+            <span class="tiktok-tab">Siguiendo</span>
+            <span class="tiktok-tab tiktok-tab--active">Para ti</span>
+            <span class="tiktok-tab">EN VIVO</span>
+          </div>
+          <!-- side actions -->
+          <div class="tiktok-side">
+            <div class="tiktok-action">
+              <svg width="22" height="22" fill="#fff" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <span>5.2k</span>
+            </div>
+            <div class="tiktok-action">
+              <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span>318</span>
+            </div>
+            <div class="tiktok-action">
+              <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              <span>Compartir</span>
+            </div>
+          </div>
+          <!-- bottom content -->
+          <div class="tiktok-bottom">
+            <div class="tiktok-handle">@casatalamantes</div>
+            <div class="tiktok-caption">Así luce el avance — 70% de la restauración completada. 200 niños pronto tendrán un espacio digno para crecer.</div>
+            <div class="tiktok-tags">#CasaTalamantes #Chihuahua #Allende</div>
+            <div class="tiktok-music">♪ Sonido original · casatalamantes</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Instagram Profile Grid -->
+      <div>
+        <div class="format-label">Vista previa de perfil · Instagram (grid 3×3)</div>
+        <div class="ig-profile">
+          <div class="ig-profile-header">
+            <div class="ig-ava"><img src="Talamantes-logo.svg" alt=""></div>
+            <div>
+              <div class="ig-profile-name">casatalamantes</div>
+              <div class="ig-profile-bio">Casa Talamantes · Allende, Chihuahua<br>Educación · Cultura · Comunidad</div>
+            </div>
+          </div>
+          <div class="ig-grid-cells">
+            <!-- Fila 1 -->
+            <div class="ig-cell">
+              <div style="position:absolute;inset:0;background:url('Fotos/compressed/header.jpg') center 40%/cover;"></div>
+            </div>
+            <div class="ig-cell">
+              <div style="position:absolute;inset:0;background:url('Fotos/compressed/restauracion.jpg') center/cover;"></div>
+            </div>
+            <div class="ig-cell">
+              <div style="position:absolute;inset:0;background:url('Fotos/compressed/ninos.jpg') center/cover;"></div>
+            </div>
+            <!-- Fila 2 -->
+            <div class="ig-cell">
+              <div style="position:absolute;inset:0;background:url('Fotos/compressed/aula-principal.jpg') center/cover;"></div>
+            </div>
+            <div class="ig-cell">
+              <div style="position:absolute;inset:0;background:url('Fotos/compressed/ninos-2.jpg') center/cover;"></div>
+            </div>
+            <div class="ig-cell">
+              <div style="position:absolute;inset:0;background:url('Fotos/compressed/clases.jpg') center/cover;"></div>
+            </div>
+            <!-- Fila 3 -->
+            <div class="ig-cell">
+              <div style="position:absolute;inset:0;background:url('Fotos/compressed/DJI_0784.jpg') center/cover;"></div>
+            </div>
+            <div class="ig-cell">
+              <div style="position:absolute;inset:0;background:url('Fotos/compressed/vigas.jpg') center/cover;"></div>
+            </div>
+            <div class="ig-cell">
+              <div style="position:absolute;inset:0;background:url('Fotos/compressed/fondo.jpg') center/cover;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div><!-- /.tiktok-page -->
+
+    <!-- Guía de uso en redes -->
+    <div class="lbl" style="margin-top:.5rem;">Reglas de aplicación en redes sociales</div>
+    <div class="social-guide-grid">
+      <div class="social-guide-item guide-do">
+        <h4>Logo en redes</h4>
+        <p>Usar siempre la versión blanca sobre fondos oscuros, y la versión terracota/café sobre fondos claros. El logo debe aparecer en esquina inferior o superior izquierda, nunca centrado ni como marca de agua grande.</p>
+      </div>
+      <div class="social-guide-item guide-do">
+        <h4>Fotografías</h4>
+        <p>Fotos reales de Casa Talamantes, los niños y la comunidad. Nunca imágenes de stock genéricas. Agregar overlay oscuro (rgba(14,7,3, 0.4–0.6)) para asegurar contraste antes de poner texto.</p>
+      </div>
+      <div class="social-guide-item guide-tip">
+        <h4>Posts de estadísticas</h4>
+        <ul>
+          <li>Número grande en Playfair Display 700, color Dorado sobre fondo oscuro</li>
+          <li>Descripción corta: máximo 8 palabras debajo del número</li>
+          <li>Siempre incluir logo y URL en la parte inferior</li>
+          <li>Nunca números perfectamente redondos sin base de datos real</li>
+        </ul>
+      </div>
+      <div class="social-guide-item guide-tip">
+        <h4>Stories / Historias</h4>
+        <ul>
+          <li>Zona segura: 250px arriba y abajo libres de contenido crítico</li>
+          <li>CTA siempre en botón dorado en la parte inferior</li>
+          <li>Una sola idea por historia — no saturar con texto</li>
+          <li>Fondo: imagen de la hacienda o gradiente oscuro de marca</li>
+        </ul>
+      </div>
+      <div class="social-guide-item guide-dont">
+        <h4>Nunca en redes</h4>
+        <ul>
+          <li>Filtros de Instagram que alteren la paleta cálida</li>
+          <li>Tipografías distintas a Playfair Display e Inter</li>
+          <li>GIFs animados con estética de meme o entretenimiento</li>
+          <li>Emojis en exceso — máximo uno por post, si aplica</li>
+          <li>Texto sobre imagen sin overlay de contraste suficiente</li>
+        </ul>
+      </div>
+      <div class="social-guide-item guide-dont">
+        <h4>Hashtags y menciones</h4>
+        <ul>
+          <li>Máximo 5 hashtags por post (no 30 — parece spam)</li>
+          <li>Siempre incluir ubicación: #Allende #Chihuahua</li>
+          <li>Mencionar aliados solo cuando hay permiso explícito</li>
+          <li>No copiar y pegar el mismo caption en todas las plataformas — adaptar el tono</li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- PÁGINA 11: Dimensiones + Footer -->
+  <div class="dimensions-final">
+    <div>
+      <div class="lbl">Dimensiones de referencia por plataforma</div>
+      <table class="sp-table">
+        <thead><tr><th>Formato</th><th>Plataforma</th><th>Dimensiones</th><th>Ratio</th><th>Uso</th></tr></thead>
+        <tbody>
+          <tr><td>Post cuadrado</td><td>Instagram · Facebook</td><td>1080 × 1080 px</td><td>1:1</td><td>Feed principal. Plantillas A (imagen) y B (cita).</td></tr>
+          <tr><td>Historia</td><td>Instagram · Facebook</td><td>1080 × 1920 px</td><td>9:16</td><td>CTAs, anuncios de evento, conteos regresivos.</td></tr>
+          <tr><td>Reels / TikTok</td><td>Instagram · TikTok</td><td>1080 × 1920 px</td><td>9:16</td><td>Videos cortos. Mismo ratio que Story.</td></tr>
+          <tr><td>Banner horizontal</td><td>Facebook · LinkedIn</td><td>1200 × 628 px</td><td>1.91:1</td><td>Posts con estadísticas, artículos, comunicados.</td></tr>
+          <tr><td>Portada de página</td><td>Facebook</td><td>1640 × 924 px</td><td>16:9</td><td>Imagen de fondo de la hacienda + logo centrado.</td></tr>
+          <tr><td>Foto de perfil</td><td>Todas</td><td>400 × 400 px</td><td>1:1</td><td>Solo símbolo del logo sobre fondo oscuro (#1C0F08).</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <footer class="bb-foot">
+      <p>© 2026 Asociación Javier Francisco Máynez A.C. · Casa Talamantes<br>Municipio de Allende, Chihuahua, México</p>
+      <span class="bb-foot-v">Brandbook v1.0 · Jun 2026</span>
+    </footer>
+  </div>
+
+</main>
+</body>
+</html>

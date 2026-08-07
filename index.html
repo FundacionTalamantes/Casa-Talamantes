@@ -1,0 +1,3096 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Casa Talamantes — Asociación Javier Francisco Máynez A.C. Educación, cultura y esperanza para niños y jóvenes del Municipio de Allende, Chihuahua.">
+  <title>Casa Talamantes — Asociación Javier Francisco Máynez A.C.</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+    /* =====================
+       VARIABLES
+    ===================== */
+    :root {
+      --color-primary: #8B4513;
+      --color-primary-dark: #6B3410;
+      --color-primary-light: #A85520;
+      --color-secondary: #D4A853;
+      --color-secondary-light: #E8C27A;
+      --color-accent: #2C5F2E;
+      --color-accent-light: #3A7A3D;
+      --color-bg: #FAF7F2;
+      --color-bg-warm: #F5EFE6;
+      --color-bg-dark: #1C0F08;
+      --color-text: #1A1A1A;
+      --color-text-muted: #5A5047;
+      --color-text-light: #FAF7F2;
+      --color-border: #DDD0C0;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2.5rem;
+      --spacing-xl: 4rem;
+      --spacing-2xl: 6rem;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.16);
+      --transition: 0.3s ease;
+      --max-width: 1120px;
+    }
+
+    /* =====================
+       RESET & BASE
+    ===================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* =====================
+       UTILITY
+    ===================== */
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--spacing-md);
+    }
+    .section-label {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-sm);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--color-text);
+      margin-bottom: var(--spacing-md);
+    }
+    .section-title--light { color: var(--color-bg); }
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+      max-width: 640px;
+      line-height: 1.75;
+    }
+    .section-subtitle--light { color: rgba(250,247,242,0.85); }
+    .divider {
+      width: 56px;
+      height: 3px;
+      background: var(--color-secondary);
+      margin-bottom: var(--spacing-lg);
+      border-radius: 2px;
+    }
+    .divider--center { margin-left: auto; margin-right: auto; }
+    .text-center { text-align: center; }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+    .fade-in-delay-4 { transition-delay: 0.4s; }
+
+    /* =====================
+       NAVIGATION
+    ===================== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: var(--spacing-md) 0;
+      transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
+      background: transparent;
+    }
+    .nav.scrolled {
+      background: rgba(28, 15, 8, 0.96);
+      box-shadow: 0 1px 24px rgba(0,0,0,0.25);
+      padding: 0.75rem 0;
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-md);
+    }
+    .nav__logo {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.65rem;
+      line-height: 1;
+    }
+    .nav__logo-img {
+      height: 50px;
+      width: auto;
+      flex-shrink: 0;
+      filter: brightness(0) invert(1);
+      transition: filter var(--transition);
+    }
+    .nav.scrolled .nav__logo-img {
+      filter: brightness(0) saturate(100%) invert(72%) sepia(40%) saturate(600%) hue-rotate(5deg) brightness(105%);
+    }
+    .nav__logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .nav__logo-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-bg);
+      letter-spacing: 0.02em;
+    }
+    .nav__logo-sub {
+      font-size: 0.62rem;
+      font-weight: 400;
+      color: var(--color-secondary);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 5px;
+    }
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-lg);
+    }
+    .nav__links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: rgba(250,247,242,0.85);
+      letter-spacing: 0.04em;
+      transition: color var(--transition);
+      position: relative;
+      white-space: nowrap;
+    }
+    .nav__links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--color-secondary);
+      transition: width var(--transition);
+    }
+    .nav__links a:hover { color: var(--color-secondary); }
+    .nav__links a:hover::after { width: 100%; }
+    .nav__cta {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 1.25rem;
+      background: var(--color-secondary);
+      color: var(--color-bg-dark) !important;
+      font-size: 0.82rem !important;
+      font-weight: 600 !important;
+      border-radius: var(--radius-sm);
+      transition: background var(--transition), transform var(--transition) !important;
+    }
+    .nav__cta::after { display: none !important; }
+    .nav__cta:hover { background: var(--color-secondary-light) !important; transform: translateY(-1px); }
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .nav__hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--color-bg);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    .nav__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav__hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* =====================
+       HERO
+    ===================== */
+    .hero {
+      position: relative;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('Fotos/header.png');
+      background-size: cover;
+      background-position: center 40%;
+      z-index: 0;
+    }
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(18, 9, 4, 0.48);
+      z-index: 1;
+    }
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.56rem, 7.2vw, 6.8rem);
+      font-weight: 400;
+      line-height: 1;
+      color: var(--color-bg);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .hero__subtitle {
+      font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(250,247,242,0.72);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.875rem 2rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      transition: all var(--transition);
+      letter-spacing: 0.03em;
+    }
+    .btn--primary {
+      background: var(--color-secondary);
+      color: var(--color-bg-dark);
+    }
+    .btn--primary:hover {
+      background: var(--color-secondary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212,168,83,0.3);
+    }
+    .btn--outline {
+      background: transparent;
+      color: var(--color-bg);
+      border: 1.5px solid rgba(250,247,242,0.4);
+    }
+    .btn--outline:hover {
+      border-color: rgba(250,247,242,0.8);
+      background: rgba(250,247,242,0.07);
+      transform: translateY(-2px);
+    }
+    .btn--accent {
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
+    .btn--accent:hover {
+      background: var(--color-accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(44,95,46,0.3);
+    }
+    .hero__scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(250,247,242,0.4);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .hero__scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, transparent, rgba(250,247,242,0.4));
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%, 100% { transform: scaleY(1); opacity: 0.4; }
+      50% { transform: scaleY(0.5); opacity: 0.8; }
+    }
+
+    /* =====================
+       STATS STRIP
+    ===================== */
+    .stats-strip {
+      background: var(--color-primary);
+      padding: var(--spacing-lg) 0;
+    }
+    .stats-strip__inner {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--spacing-md);
+      text-align: center;
+    }
+    .stat-item__number {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--color-secondary);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .stat-item__label {
+      font-size: 0.8rem;
+      color: rgba(250,247,242,0.75);
+      letter-spacing: 0.06em;
+      font-weight: 400;
+    }
+
+    /* =====================
+       FILOSOFIA (intro)
+    ===================== */
+    .filosofia {
+      padding: clamp(4rem, 8vw, 7rem) 0;
+      background: var(--color-bg);
+    }
+    .filosofia__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 6rem);
+      align-items: center;
+    }
+    .filosofia__left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .filosofia__eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .filosofia__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--color-text);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+    .filosofia__title em {
+      font-style: italic;
+    }
+    .filosofia__body {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      line-height: 1.8;
+      max-width: 480px;
+      margin-bottom: 2rem;
+    }
+    .filosofia__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text);
+      border-bottom: 1px solid var(--color-text);
+      padding-bottom: 2px;
+      transition: color var(--transition), border-color var(--transition);
+      width: fit-content;
+    }
+    .filosofia__link:hover {
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+    .filosofia__right {
+      position: relative;
+    }
+    .filosofia__media {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: var(--color-bg-warm);
+    }
+    .filosofia__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .filosofia__play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(18, 9, 4, 0.22);
+      transition: background var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .filosofia__play:hover { background: rgba(18, 9, 4, 0.38); }
+    .filosofia__play-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(250,247,242,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform var(--transition), background var(--transition);
+    }
+    .filosofia__play:hover .filosofia__play-btn {
+      transform: scale(1.08);
+      background: #fff;
+    }
+    .filosofia__play-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--color-text);
+      margin-left: 3px;
+    }
+    @media (max-width: 900px) {
+      .filosofia__inner { grid-template-columns: 1fr; }
+      .filosofia__body { max-width: 100%; }
+    }
+
+    /* =====================
+       PROBLEMA
+    ===================== */
+    .section {
+      padding: var(--spacing-2xl) 0;
+    }
+    .section--warm {
+      background: var(--color-bg-warm);
+    }
+    .section--dark {
+      background: var(--color-bg-dark);
+    }
+    .contexto {
+      background: var(--color-bg);
+      padding: clamp(4rem, 8vw, 7rem) 0;
+    }
+    .contexto__grid {
+      display: grid;
+      grid-template-columns: minmax(260px, 42%) 1fr;
+      gap: clamp(3rem, 6vw, 6rem);
+      align-items: center;
+      margin-bottom: clamp(3rem, 5vw, 5rem);
+    }
+    .contexto__img {
+      width: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .contexto__right { display: flex; flex-direction: column; }
+    .contexto__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--color-text);
+      margin-bottom: 1.25rem;
+    }
+    .contexto__body {
+      font-size: 0.92rem;
+      color: var(--color-text-muted);
+      line-height: 1.85;
+      margin-bottom: 2rem;
+    }
+    .contexto__list {
+      list-style: none;
+      border-top: 1px solid var(--color-border);
+    }
+    .contexto__list li {
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text);
+    }
+    .contexto__stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--color-border);
+      border: 1px solid var(--color-border);
+    }
+    .contexto__stat {
+      background: var(--color-bg);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .contexto__stat-number {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1;
+    }
+    .contexto__stat-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1.4;
+    }
+    .contexto__stat-desc {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+    @media (max-width: 900px) {
+      .contexto__grid { grid-template-columns: 1fr; }
+      .contexto__stats { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .contexto__stats { grid-template-columns: 1fr; }
+    }
+
+    /* =====================
+       PROGRAMAS
+    ===================== */
+    #programas {
+      background-image: url('Fotos/fondo.png');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    #programas::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(14, 7, 3, 0.62);
+      z-index: 0;
+    }
+    #programas .container { position: relative; z-index: 1; max-width: 1400px; }
+    #programas .section-label { color: rgba(212,168,83,0.85); }
+    #programas .section-title { color: var(--color-bg); }
+    #programas .section-subtitle { color: rgba(250,247,242,0.7); }
+    #programas .divider { background: var(--color-secondary); }
+    .programas__header {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+    }
+    .programas__header .divider { margin: 0 auto var(--spacing-lg); }
+    .programas__carousel-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .programas__grid {
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 12px;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+    .programas__grid::-webkit-scrollbar { display: none; }
+    .programas__carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(250,247,242,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      transition: background var(--transition);
+    }
+    .programas__carousel-btn:hover { background: rgba(250,247,242,0.28); }
+    .programas__carousel-btn--prev { left: -20px; }
+    .programas__carousel-btn--next { right: -20px; }
+    .programa-card {
+      background: rgba(250, 247, 242, 0.07);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg) var(--spacing-sm);
+      text-align: center;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+      flex: 0 0 calc(25% - 9px);
+      scroll-snap-align: start;
+    }
+    .programa-card:hover {
+      background: rgba(250, 247, 242, 0.13);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .programa-card__icon {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto var(--spacing-md);
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .programa-card__icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--color-secondary);
+      stroke: var(--color-secondary);
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .programa-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--color-bg);
+      margin-bottom: var(--spacing-xs);
+      line-height: 1.3;
+    }
+    .programa-card p {
+      font-size: 0.9rem;
+      color: rgba(250,247,242,0.68);
+      line-height: 1.65;
+    }
+    .programa-card__badge {
+      display: inline-block;
+      margin-top: var(--spacing-sm);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      background: rgba(212,168,83,0.12);
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+
+    /* =====================
+       SOBRE NOSOTROS
+    ===================== */
+    .historia {
+      background: var(--color-bg);
+      overflow: hidden;
+      padding: clamp(3rem, 6vw, 5rem) 0;
+    }
+    .historia__layout {
+      display: grid;
+      grid-template-columns: minmax(160px, 22%) 1fr minmax(160px, 22%);
+      align-items: center;
+      min-height: 580px;
+    }
+    .historia__col {
+      overflow: hidden;
+    }
+    .historia__col--left {
+      align-self: start;
+      margin-top: 2rem;
+    }
+    .historia__col--right {
+      align-self: end;
+      margin-bottom: 2rem;
+    }
+    .historia__img {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      display: block;
+    }
+    .historia__center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 4rem clamp(1.5rem, 4vw, 3.5rem);
+    }
+    .historia__center .section-label {
+      margin-bottom: 1.25rem;
+    }
+    .historia__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 3.5vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--color-text);
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+    .historia__body {
+      font-size: 0.92rem;
+      color: var(--color-text-muted);
+      line-height: 1.85;
+      max-width: 460px;
+      margin-bottom: 0.75rem;
+    }
+    .historia__cta {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 1.5rem;
+      padding: 0.8rem 2rem;
+      border: 1px solid var(--color-text);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text);
+      transition: background var(--transition), color var(--transition);
+    }
+    .historia__cta:hover {
+      background: var(--color-text);
+      color: var(--color-bg);
+    }
+    @media (max-width: 900px) {
+      .historia__layout {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .historia__col--left,
+      .historia__col--right { margin: 0; align-self: auto; }
+      .historia__col--right { order: 3; }
+      .historia__center { order: 2; }
+      .historia__img { aspect-ratio: 4 / 3; }
+    }
+    .progress-bar-wrap {
+      margin-top: 8px;
+      background: var(--color-border);
+      border-radius: 99px;
+      height: 6px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+      transition: width 1.2s ease;
+    }
+
+    /* =====================
+       GALERIA RESTAURACION
+    ===================== */
+    .galeria-preview {
+      background: var(--color-bg);
+      padding: clamp(4rem, 8vw, 7rem) 0;
+    }
+    .galeria-preview__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 280px 280px;
+      grid-template-areas:
+        "texto  etapa1  etapa2  etapa3"
+        "inicio etapa1  etapa2  etapa3";
+      gap: 12px;
+    }
+    .galeria-preview__texto {
+      grid-area: texto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-right: 1.5rem;
+    }
+    .galeria-preview__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--color-text);
+      margin-bottom: 1rem;
+    }
+    .galeria-preview__body {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .galeria-preview__inicio { grid-area: inicio; }
+    .galeria-preview__etapa1 { grid-area: etapa1; }
+    .galeria-preview__etapa2 { grid-area: etapa2; }
+    .galeria-preview__etapa3 { grid-area: etapa3; }
+    .galeria-img-link {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .galeria-img-link img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .galeria-img-link:hover img { transform: scale(1.04); }
+    .galeria-img-link__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(14,7,3,0.72) 0%, transparent 55%);
+      transition: opacity var(--transition);
+    }
+    .galeria-img-link:hover .galeria-img-link__overlay {
+      background: linear-gradient(to top, rgba(14,7,3,0.82) 0%, rgba(14,7,3,0.1) 70%);
+    }
+    .galeria-img-link__label {
+      position: absolute;
+      bottom: 1.1rem;
+      left: 1.25rem;
+      right: 1.25rem;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 400;
+      color: #fff;
+      letter-spacing: 0.01em;
+    }
+    .galeria-img-link__sublabel {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 3px;
+    }
+    /* DETALLE */
+    .galeria-detalle {
+      background: var(--color-bg-warm);
+      padding: clamp(4rem, 8vw, 7rem) 0;
+    }
+    .galeria-detalle__header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .galeria-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 2.5rem;
+    }
+    .galeria-tab {
+      padding: 0.75rem 2rem;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      cursor: pointer;
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .galeria-tab:hover { color: var(--color-text); }
+    .galeria-tab.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-primary);
+    }
+    .galeria-stage { display: none; }
+    .galeria-stage.active { display: block; }
+    .galeria-stage__intro {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      text-align: center;
+      font-size: 0.92rem;
+      color: var(--color-text-muted);
+      line-height: 1.8;
+    }
+    .galeria-grid {
+      columns: 3;
+      column-gap: 8px;
+    }
+    .galeria-grid__item {
+      break-inside: avoid;
+      margin-bottom: 8px;
+      overflow: hidden;
+      border-radius: 6px;
+    }
+    .galeria-grid__item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .galeria-grid__item:hover img { transform: scale(1.03); }
+    @media (max-width: 768px) { .galeria-grid { columns: 2; } }
+    @media (max-width: 480px) { .galeria-grid { columns: 1; } }
+    @media (max-width: 900px) {
+      .galeria-preview__grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto auto;
+        grid-template-areas:
+          "texto  texto"
+          "inicio etapa1"
+          "etapa2 etapa2"
+          "etapa3 etapa3";
+        gap: 10px;
+      }
+      .galeria-preview__grid > div,
+      .galeria-preview__grid > a { height: 240px; }
+      .galeria-preview__texto { height: auto !important; padding: 0; }
+    }
+    @media (max-width: 480px) {
+      .galeria-tabs { flex-direction: column; border-bottom: none; }
+      .galeria-tab { border-bottom: 1px solid var(--color-border); text-align: left; }
+    }
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(10, 5, 2, 0.95);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox__img {
+      max-width: 90vw;
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 4px;
+      user-select: none;
+    }
+    .lightbox__btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background var(--transition);
+      backdrop-filter: blur(8px);
+    }
+    .lightbox__btn:hover { background: rgba(255,255,255,0.22); }
+    .lightbox__prev { left: 1.5rem; }
+    .lightbox__next { right: 1.5rem; }
+    .lightbox__close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.7);
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color var(--transition);
+    }
+    .lightbox__close:hover { color: #fff; }
+    .lightbox__counter {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.1em;
+    }
+
+    /* =====================
+       IMPACTO / METAS
+    ===================== */
+    .metas__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin-bottom: var(--spacing-xl);
+    }
+    .meta-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(28,25,23,0.07);
+    }
+    .meta-card__img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: var(--color-bg-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .meta-card__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .meta-card__img-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #e8ddd0 0%, #d4c4b0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .meta-card__img-placeholder svg {
+      width: 32px;
+      height: 32px;
+      opacity: 0.3;
+      stroke: var(--color-primary);
+      fill: none;
+      stroke-width: 1.5;
+    }
+    .meta-card__body {
+      padding: 1.25rem 1.25rem 1.5rem;
+    }
+    .meta-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--color-text);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    .meta-card__data {
+      display: flex;
+      gap: 1px;
+      background: var(--color-border);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .meta-card__data-item {
+      flex: 1;
+      background: #fff;
+      padding: 0.6rem 0.85rem;
+    }
+    .meta-card__data-label {
+      font-size: 0.68rem;
+      color: var(--color-text-muted);
+      margin-bottom: 2px;
+    }
+    .meta-card__data-value {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1;
+    }
+    .meta-card__desc {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      margin-top: 0.75rem;
+    }
+    .meta-progress {
+      background: rgba(139,69,19,0.1);
+      border-radius: 99px;
+      height: 4px;
+      overflow: hidden;
+      margin-top: 0.75rem;
+    }
+    .meta-progress__fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width 1.2s ease;
+    }
+    .meta-progress__fill--primary {
+      background: linear-gradient(90deg, var(--color-primary-light), var(--color-secondary));
+    }
+    .meta-progress__fill--accent {
+      background: linear-gradient(90deg, var(--color-accent), #5AA85D);
+    }
+    @media (max-width: 900px) { .metas__grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px)  { .metas__grid { grid-template-columns: 1fr; } }
+    .fechac-section {
+      position: relative;
+      padding: clamp(5rem, 10vw, 9rem) 0;
+      background-image: url('Fotos/fondo-2.png');
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .fechac-section__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(14, 7, 3, 0.62);
+    }
+    .fechac-section__content {
+      position: relative;
+      z-index: 1;
+    }
+    .fechac-section__eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      margin-bottom: 1rem;
+    }
+    .fechac-section__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 400;
+      color: var(--color-bg);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .fechac-section__body {
+      font-size: 1rem;
+      color: rgba(250,247,242,0.72);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+    .fechac-banner {
+      background: rgba(212,168,83,0.08);
+      border: 1px solid rgba(212,168,83,0.25);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg) var(--spacing-xl);
+      text-align: center;
+    }
+    .fechac-banner p {
+      color: rgba(250,247,242,0.75);
+      font-size: 0.95rem;
+      margin-bottom: var(--spacing-sm);
+    }
+    .fechac-scheme {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+      margin-top: var(--spacing-md);
+    }
+    .fechac-scheme__item {
+      text-align: center;
+    }
+    .fechac-scheme__pct {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--color-secondary);
+      line-height: 1;
+    }
+    .fechac-scheme__label {
+      font-size: 0.78rem;
+      color: rgba(250,247,242,0.6);
+      letter-spacing: 0.05em;
+    }
+    .fechac-scheme__divider {
+      font-size: 1.5rem;
+      color: #ffffff;
+    }
+
+    /* =====================
+       ALIADOS
+    ===================== */
+    .aliados__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-xl);
+      align-items: start;
+      margin-top: var(--spacing-xl);
+    }
+    .aliados__why h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      font-weight: 400;
+      color: var(--color-text);
+      margin-bottom: var(--spacing-md);
+      line-height: 1.25;
+    }
+    .aliados__why p {
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-md);
+      font-size: 0.97rem;
+      line-height: 1.75;
+    }
+    .beneficios {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+    .beneficio-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      transition: box-shadow var(--transition);
+    }
+    .beneficio-item:hover { box-shadow: var(--shadow-sm); }
+    .beneficio-item__icon {
+      width: 36px;
+      height: 36px;
+      background: var(--color-bg-warm);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .beneficio-item__icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--color-primary);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .beneficio-item h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 2px;
+    }
+    .beneficio-item p {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      line-height: 1.55;
+    }
+
+    /* =====================
+       FORMULARIO / CTA
+    ===================== */
+    .cta-section {
+      background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-bg-dark) 50%, rgba(44,95,46,0.4) 100%);
+      padding: var(--spacing-2xl) 0;
+    }
+    .cta-section__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-xl);
+      align-items: start;
+    }
+    .cta-section__content h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 400;
+      color: var(--color-bg);
+      line-height: 1.2;
+      margin-bottom: var(--spacing-md);
+    }
+    .cta-section__content h2 em {
+      font-style: italic;
+      color: var(--color-secondary);
+    }
+    .cta-section__content p {
+      color: rgba(250,247,242,0.75);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: var(--spacing-md);
+    }
+    .contact-ways {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-lg);
+    }
+    .contact-way {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(250,247,242,0.8);
+      font-size: 0.9rem;
+      transition: color var(--transition);
+    }
+    .contact-way:hover { color: var(--color-secondary); }
+    .contact-way svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--color-secondary);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .form-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(212,168,83,0.2);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      backdrop-filter: blur(10px);
+    }
+    .form-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--color-bg);
+      margin-bottom: var(--spacing-lg);
+    }
+    .form-group {
+      margin-bottom: var(--spacing-md);
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: rgba(250,247,242,0.7);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem 2.5rem 0.75rem 1rem;
+      background: transparent;
+      border: 1.5px solid rgba(212,168,83,0.2);
+      border-radius: var(--radius-sm);
+      color: var(--color-bg);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      transition: border-color var(--transition);
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(212,168,83,0.6)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      cursor: pointer;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(250,247,242,0.3);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--color-secondary);
+      background: rgba(255,255,255,0.09);
+    }
+    .form-group input.error,
+    .form-group textarea.error,
+    .form-group select.error {
+      border-color: #E05252;
+    }
+    .form-group select option { background: #2a1508; }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-error {
+      font-size: 0.75rem;
+      color: #E07070;
+      margin-top: 4px;
+      display: none;
+    }
+    .form-error.visible { display: block; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-sm); }
+    .form-submit {
+      width: 100%;
+      padding: 0.875rem;
+      background: var(--color-secondary);
+      color: var(--color-bg-dark);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+      letter-spacing: 0.05em;
+      margin-top: var(--spacing-xs);
+    }
+    .form-submit:hover {
+      background: var(--color-secondary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212,168,83,0.3);
+    }
+    .form-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: var(--spacing-lg);
+    }
+    .form-success.visible { display: block; }
+    .form-success__icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(44,95,46,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--spacing-md);
+    }
+    .form-success__icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: #5AA85D;
+      fill: none;
+      stroke-width: 2.5;
+    }
+    .form-success h4 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: var(--color-bg);
+      margin-bottom: var(--spacing-xs);
+    }
+    .form-success p {
+      color: rgba(250,247,242,0.65);
+      font-size: 0.9rem;
+    }
+
+    /* =====================
+       IMPACTO Y TRANSPARENCIA
+    ===================== */
+    .transparencia { padding: clamp(4rem, 8vw, 7rem) 0; }
+    .transparencia__intro {
+      max-width: 680px;
+      margin: 0 auto var(--spacing-2xl);
+      text-align: center;
+    }
+    .transparencia__section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 400;
+      color: var(--color-text);
+      margin-bottom: var(--spacing-sm);
+    }
+    .transparencia__section-body {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .transp-module { margin-bottom: clamp(3rem, 6vw, 5rem); }
+    .transp-module__head {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 2px solid var(--color-border);
+      margin-bottom: var(--spacing-lg);
+      flex-wrap: wrap;
+    }
+    .transp-module__letter {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--color-secondary);
+      font-weight: 700;
+      line-height: 1;
+    }
+    .transp-module__title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+    .transp-module__sub {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      margin-left: auto;
+    }
+    /* Module A */
+    .transp-a__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-xl);
+      align-items: start;
+    }
+    .transp-a__col-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-md);
+    }
+    .transp-doc-btn {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: 0.9rem var(--spacing-md);
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin-bottom: 0.75rem;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      cursor: default;
+    }
+    .transp-doc-btn:hover { border-color: var(--color-primary); box-shadow: var(--shadow-sm); }
+    .transp-doc-btn__icon {
+      width: 38px; height: 38px;
+      background: var(--color-primary);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .transp-doc-btn__icon svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .transp-doc-btn__info { flex: 1; }
+    .transp-doc-btn__name { font-size: 0.88rem; font-weight: 600; color: var(--color-text); line-height: 1.3; }
+    .transp-doc-btn__meta { font-size: 0.73rem; color: var(--color-text-muted); margin-top: 2px; }
+    .transp-doc-btn__dl { color: var(--color-text-muted); display: flex; align-items: center; }
+    .transp-doc-btn__dl svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .transp-doc-note { font-size: 0.75rem; color: var(--color-text-muted); margin-top: var(--spacing-sm); font-style: italic; }
+    .transp-a__col-title { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-text-muted); margin-bottom: var(--spacing-md); }
+    .transp-chart__wrap { display: flex; align-items: center; gap: var(--spacing-lg); }
+    .transp-donut { flex-shrink: 0; width: 160px; height: 160px; }
+    .transp-legend { flex: 1; }
+    .transp-legend__item { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.9rem; }
+    .transp-legend__dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .transp-legend__label { font-size: 0.83rem; color: var(--color-text-muted); flex: 1; line-height: 1.3; }
+    .transp-legend__pct { font-size: 0.9rem; font-weight: 700; color: var(--color-text); }
+    /* Module B */
+    .retrib-tabs {
+      display: flex;
+      border-bottom: 2px solid var(--color-border);
+      margin-bottom: var(--spacing-lg);
+      overflow-x: auto;
+    }
+    .retrib-tab {
+      padding: 0.65rem 1.25rem;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--color-text-muted);
+      background: none; border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      cursor: pointer; white-space: nowrap;
+      transition: color var(--transition);
+    }
+    .retrib-tab:hover { color: var(--color-primary); }
+    .retrib-tab.active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+    .retrib-panel { display: none; }
+    .retrib-panel.active { display: block; }
+    .retrib-panel__intro {
+      font-size: 0.9rem; color: var(--color-text-muted);
+      line-height: 1.8; margin-bottom: var(--spacing-lg); max-width: 720px;
+    }
+    .retrib-grid { columns: 4; column-gap: 10px; }
+    .retrib-grid__item { break-inside: avoid; margin-bottom: 10px; border-radius: var(--radius-sm); overflow: hidden; }
+    .retrib-grid__item img { width: 100%; display: block; transition: transform 0.4s ease; }
+    .retrib-grid__item:hover img { transform: scale(1.03); }
+    .retrib-event-section { margin-bottom: var(--spacing-lg); }
+    .retrib-event-section:last-child { margin-bottom: 0; }
+    .retrib-event-section__title {
+      font-family: var(--font-display);
+      font-size: 1rem; font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--spacing-sm);
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    /* Module C */
+    .prensa-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-md); }
+    .prensa-card {
+      border-radius: var(--radius-md); overflow: hidden;
+      background: #fff; box-shadow: var(--shadow-sm);
+      border: 1px solid var(--color-border);
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+    .prensa-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+    .prensa-card__thumb {
+      width: 100%; height: 180px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .prensa-card__thumb--1 { background: linear-gradient(135deg, #6B3410 0%, #A85520 100%); }
+    .prensa-card__thumb--2 { background: linear-gradient(135deg, #1C3A1D 0%, #2C5F2E 100%); }
+    .prensa-card__thumb--3 { background: linear-gradient(135deg, #3A2A0E 0%, #8B4513 100%); }
+    .prensa-card__thumb svg { width: 40px; height: 40px; stroke: rgba(255,255,255,0.3); fill: none; stroke-width: 1.5; }
+    .prensa-card__body { padding: var(--spacing-md); }
+    .prensa-card__date { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-secondary); margin-bottom: 0.5rem; }
+    .prensa-card__title { font-family: var(--font-display); font-size: 0.98rem; font-weight: 600; color: var(--color-text); line-height: 1.45; margin-bottom: var(--spacing-sm); }
+    .prensa-card__btn { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; font-weight: 600; color: var(--color-primary); letter-spacing: 0.04em; text-transform: uppercase; transition: gap var(--transition); }
+    .prensa-card__btn:hover { gap: 0.55rem; }
+    .prensa-card__btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .prensa-note { margin-top: var(--spacing-lg); text-align: center; font-size: 0.8rem; color: var(--color-text-muted); font-style: italic; }
+    @media (max-width: 900px) {
+      .transp-a__grid { grid-template-columns: 1fr; }
+      .transp-chart__wrap { flex-direction: column; align-items: flex-start; }
+      .prensa-grid { grid-template-columns: 1fr 1fr; }
+      .retrib-grid { columns: 2; }
+    }
+    @media (max-width: 480px) {
+      .prensa-grid { grid-template-columns: 1fr; }
+      .retrib-grid { columns: 1; }
+    }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    .footer {
+      background: var(--color-bg-dark);
+      border-top: 1px solid rgba(212,168,83,0.12);
+      padding: var(--spacing-xl) 0 var(--spacing-lg);
+    }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: var(--spacing-xl);
+      margin-bottom: var(--spacing-xl);
+    }
+    .footer__brand {
+      max-width: 280px;
+    }
+    .footer__logo-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-bg);
+      margin-bottom: 4px;
+    }
+    .footer__logo-sub {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      margin-bottom: var(--spacing-sm);
+    }
+    .footer__tagline {
+      font-size: 0.85rem;
+      color: rgba(250,247,242,0.5);
+      line-height: 1.65;
+      margin-bottom: var(--spacing-md);
+    }
+    .footer__col h4 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      margin-bottom: var(--spacing-md);
+    }
+    .footer__links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer__links a {
+      font-size: 0.85rem;
+      color: rgba(250,247,242,0.55);
+      transition: color var(--transition);
+    }
+    .footer__links a:hover { color: var(--color-secondary); }
+    .footer__contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: rgba(250,247,242,0.55);
+      margin-bottom: 10px;
+      transition: color var(--transition);
+    }
+    .footer__contact-item:hover { color: rgba(250,247,242,0.85); }
+    .footer__contact-item svg {
+      width: 15px;
+      height: 15px;
+      stroke: var(--color-secondary);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: var(--spacing-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+    .footer__bottom p {
+      font-size: 0.78rem;
+      color: rgba(250,247,242,0.35);
+    }
+    .footer__bottom-links {
+      display: flex;
+      gap: var(--spacing-md);
+    }
+    .footer__bottom-links a {
+      font-size: 0.78rem;
+      color: rgba(250,247,242,0.35);
+      transition: color var(--transition);
+    }
+    .footer__bottom-links a:hover { color: var(--color-secondary); }
+
+    /* =====================
+       MOBILE NAV OVERLAY
+    ===================== */
+    .nav__mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(28,15,8,0.98);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-lg);
+    }
+    .nav__mobile-menu.open { display: flex; }
+    .nav__mobile-menu a {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--color-bg);
+      transition: color var(--transition);
+    }
+    .nav__mobile-menu a:hover { color: var(--color-secondary); }
+    .nav__mobile-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      color: rgba(250,247,242,0.7);
+      font-size: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    /* =====================
+       RESPONSIVE
+    ===================== */
+    @media (max-width: 900px) {
+      .nav__links { display: none; }
+      .nav__hamburger { display: flex; }
+      .aliados__grid { grid-template-columns: 1fr; }
+      .cta-section__inner { grid-template-columns: 1fr; }
+      .footer__grid { grid-template-columns: 1fr 1fr; }
+      .footer__brand { grid-column: 1 / -1; max-width: 100%; }
+    }
+    @media (max-width: 640px) {
+      :root { --spacing-2xl: 4rem; }
+      .hero { padding: 6rem 0 5rem; }
+      .hero__ornament, .hero__ornament-2 { display: none; }
+      .stats-strip__inner { grid-template-columns: 1fr 1fr; }
+      .programa-card { flex: 0 0 calc(50% - 6px); }
+      .metas__grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer__grid { grid-template-columns: 1fr; }
+      .footer__bottom { flex-direction: column; text-align: center; }
+      .fechac-scheme { gap: var(--spacing-sm); }
+    }
+    @media (max-width: 420px) {
+      .programa-card { flex: 0 0 calc(85% - 6px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== MOBILE MENU ===== -->
+  <nav class="nav__mobile-menu" id="mobileMenu" role="dialog" aria-label="Menú de navegación móvil">
+    <button class="nav__mobile-close" id="mobileClose" aria-label="Cerrar menú">&times;</button>
+    <a href="#quienes-somos" class="mobile-link">Quiénes Somos</a>
+    <a href="#programas" class="mobile-link">Programas</a>
+    <a href="#impacto" class="mobile-link">Impacto</a>
+    <a href="transparencia.html" class="mobile-link">Transparencia</a>
+    <a href="#unete" class="mobile-link btn btn--primary" style="font-family:var(--font-body);font-size:1rem;">Únete</a>
+  </nav>
+
+  <!-- ===== NAV ===== -->
+  <header class="nav" id="mainNav" role="banner">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="#" class="nav__logo" aria-label="Casa Talamantes — Inicio">
+          <img src="Talamantes-logo.svg" alt="" class="nav__logo-img" aria-hidden="true">
+        </a>
+        <nav role="navigation" aria-label="Navegación principal">
+          <ul class="nav__links">
+            <li><a href="#quienes-somos">Quiénes Somos</a></li>
+            <li><a href="#programas">Programas</a></li>
+            <li><a href="#impacto">Impacto</a></li>
+            <li><a href="transparencia.html">Transparencia</a></li>
+            <li><a href="#unete" class="nav__cta">Conviértete en Aliado</a></li>
+          </ul>
+        </nav>
+        <button class="nav__hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="inicio" aria-labelledby="heroTitle">
+      <div class="hero__bg"></div>
+      <div class="hero__overlay"></div>
+      <div class="hero__content">
+        <h1 class="hero__title" id="heroTitle">Casa Talamantes</h1>
+        <p class="hero__subtitle">Tejiendo comunidad · Creando oportunidades</p>
+      </div>
+    </section>
+
+    <!-- ===== FILOSOFIA ===== -->
+    <section class="filosofia" id="quienes-somos" aria-labelledby="filosofiaTitle">
+      <div class="container">
+        <div class="filosofia__inner">
+          <div class="filosofia__left fade-in">
+            <div class="filosofia__eyebrow">Municipio de Allende, Chihuahua</div>
+            <h2 class="filosofia__title" id="filosofiaTitle">
+              En esta tierra,<br>
+              <em>un futuro diferente</em><br>
+              es posible.
+            </h2>
+            <p class="filosofia__body">
+              Cientos de niños y jóvenes en el Municipio de Allende enfrentan la deserción escolar y la brecha digital debido a la falta de infraestructura y oportunidades locales.
+            </p>
+            <p class="filosofia__body">
+              Casa Talamantes es la respuesta educativa, cultural y humana que esta comunidad necesita.
+            </p>
+            <a href="#programas" class="filosofia__link">
+              Conoce el proyecto &nbsp;&#8594;
+            </a>
+          </div>
+          <div class="filosofia__right fade-in fade-in-delay-2">
+            <div class="filosofia__media">
+              <img src="Material/portada.png" alt="Vista aérea de Casa Talamantes, Talamantes, Chihuahua">
+              <a href="https://javierfranciscomaynez.org" target="_blank" rel="noopener" class="filosofia__play" aria-label="Ver video de Casa Talamantes">
+                <div class="filosofia__play-btn">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STATS STRIP ===== -->
+    <section class="stats-strip" aria-label="Datos del municipio">
+      <div class="container">
+        <div class="stats-strip__inner">
+          <div class="stat-item fade-in">
+            <div class="stat-item__number">8,487</div>
+            <div class="stat-item__label">Habitantes en el municipio</div>
+          </div>
+          <div class="stat-item fade-in fade-in-delay-1">
+            <div class="stat-item__number">1 de 4</div>
+            <div class="stat-item__label">Es menor de edad</div>
+          </div>
+          <div class="stat-item fade-in fade-in-delay-2">
+            <div class="stat-item__number">27.7%</div>
+            <div class="stat-item__label">Población en edad escolar</div>
+          </div>
+          <div class="stat-item fade-in fade-in-delay-3">
+            <div class="stat-item__number">19.2%</div>
+            <div class="stat-item__label">Adultos mayores (vs. 11.2% estatal)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EL CONTEXTO ===== -->
+    <section class="contexto" id="el-problema" aria-labelledby="problemaTitle">
+      <div class="container">
+
+        <div class="contexto__grid">
+          <div class="fade-in">
+            <img src="Fotos/ninos-2.png" alt="Niños en Casa Talamantes, Talamantes, Chihuahua" class="contexto__img">
+          </div>
+          <div class="fade-in fade-in-delay-1">
+            <div class="section-label">El contexto</div>
+            <h2 class="contexto__title" id="problemaTitle">
+              Una comunidad ante<br>una encrucijada crítica
+            </h2>
+            <p class="contexto__body">
+              El Municipio de Allende concentra una alta proporción de población joven y una notable ausencia de infraestructura educativa. La deserción escolar no es un problema aislado: representa la pérdida de talento y la falta de alternativas viables para que las nuevas generaciones alcancen su máximo potencial.
+            </p>
+            <ul class="contexto__list">
+              <li>Deserción escolar por falta de infraestructura educativa</li>
+              <li>Brecha digital sin acceso a tecnología ni internet</li>
+              <li>Ausencia de espacios seguros de desarrollo para niños</li>
+              <li>Única institución con programación informática en la zona</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="contexto__stats fade-in">
+          <div class="contexto__stat">
+            <div class="contexto__stat-number">1,516</div>
+            <div class="contexto__stat-label">Niños de 0 a 11 años</div>
+            <div class="contexto__stat-desc">17.9% de la población total del municipio</div>
+          </div>
+          <div class="contexto__stat">
+            <div class="contexto__stat-number">833</div>
+            <div class="contexto__stat-label">Adolescentes de 12 a 17 años</div>
+            <div class="contexto__stat-desc">9.8% en la etapa más vulnerable al abandono escolar</div>
+          </div>
+          <div class="contexto__stat">
+            <div class="contexto__stat-number">0</div>
+            <div class="contexto__stat-label">Otras escuelas con programación</div>
+            <div class="contexto__stat-desc">Casa Talamantes es la única oferta de TI en la región</div>
+          </div>
+          <div class="contexto__stat">
+            <div class="contexto__stat-number">27.7%</div>
+            <div class="contexto__stat-label">Población en edad escolar</div>
+            <div class="contexto__stat-desc">1 de cada 4 habitantes es menor de edad en el municipio</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== PROGRAMAS ===== -->
+    <section class="section" id="programas" aria-labelledby="programasTitle">
+      <div class="container">
+        <div class="programas__header fade-in">
+          <div class="section-label">Nuestra respuesta</div>
+          <h2 class="section-title" id="programasTitle">Un programa integral,<br>no solo ayuda inmediata</h2>
+          <div class="divider divider--center"></div>
+          <p class="section-subtitle" style="margin:0 auto;">Cada área de acción está diseñada para dar a niños, jóvenes y adultos mayores herramientas reales para transformar su futuro, con seguimiento personalizado más allá del aula.</p>
+        </div>
+        <div class="programas__carousel-wrap">
+          <button class="programas__carousel-btn programas__carousel-btn--prev" id="carouselPrev" aria-label="Anterior">&#8249;</button>
+          <button class="programas__carousel-btn programas__carousel-btn--next" id="carouselNext" aria-label="Siguiente">&#8250;</button>
+        <div class="programas__grid" id="programasGrid">
+
+          <article class="programa-card fade-in fade-in-delay-1">
+            <div class="programa-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3>Educación Extracurricular</h3>
+            <p>Actividades deportivas, culturales y educativas para niños de 6 a 14 años (primaria y secundaria), con seguimiento de trayectorias individuales.</p>
+            <div class="programa-card__badge">6–14 años</div>
+          </article>
+
+          <article class="programa-card fade-in fade-in-delay-2">
+            <div class="programa-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+            </div>
+            <h3>Tecnología y Programación</h3>
+            <p>La única oferta de computación e informática en la región. Semillero de futuros talentos tecnológicos y de negocios.</p>
+            <div class="programa-card__badge">Unico en la region</div>
+          </article>
+
+          <article class="programa-card fade-in fade-in-delay-3">
+            <div class="programa-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            </div>
+            <h3>Apoyo Psicológico</h3>
+            <p>Atención psicológica para niños, jóvenes y adultos. Respuesta directa al creciente índice de suicidios y al impacto del entorno violento.</p>
+            <div class="programa-card__badge">Todas las edades</div>
+          </article>
+
+          <article class="programa-card fade-in fade-in-delay-1">
+            <div class="programa-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            </div>
+            <h3>Deportes</h3>
+            <p>Fútbol y básquetbol como vehículo de disciplina, trabajo en equipo e inclusión. Espacio seguro y estructurado para la energía juvenil.</p>
+            <div class="programa-card__badge">Primaria y Secundaria</div>
+          </article>
+
+          <article class="programa-card fade-in fade-in-delay-2">
+            <div class="programa-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </div>
+            <h3>Cultura y Artes</h3>
+            <p>Expresion artistica, identidad cultural y oficios tradicionales. Preservacion del patrimonio y desarrollo de habilidades creativas.</p>
+            <div class="programa-card__badge">Ninos y Jovenes</div>
+          </article>
+
+          <article class="programa-card fade-in fade-in-delay-3">
+            <div class="programa-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            </div>
+            <h3>Apoyo Alimentario</h3>
+            <p>Programa nutritivo para niños en preescolar (4–6 años) y adultos mayores. Seguridad alimentaria como base para el aprendizaje y la dignidad.</p>
+            <div class="programa-card__badge">60 personas · Meta 2030</div>
+          </article>
+
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== NUESTRA HISTORIA ===== -->
+    <section class="historia" id="sobre-nosotros" aria-labelledby="historiaTitle">
+      <div class="historia__layout">
+
+        <div class="historia__col historia__col--left fade-in">
+          <img src="Fotos/restauracion.png" alt="Trabajador restaurando los muros de adobe de Casa Talamantes" class="historia__img">
+        </div>
+
+        <div class="historia__center fade-in fade-in-delay-1">
+          <div class="section-label">Nuestra historia</div>
+          <h2 class="historia__title" id="historiaTitle">
+            Una hacienda histórica,<br>una misión viva
+          </h2>
+          <p class="historia__body">
+            Casa Talamantes es una hacienda de adobe en Talamantes, Chihuahua, rescatada y reconvertida en centro educativo y comunitario. Desde 2019, la Asociación Javier Francisco Máynez A.C. trabaja para restaurar este espacio y devolverlo a la comunidad con un propósito transformador.
+          </p>
+          <p class="historia__body">
+            Su arquitectura centenaria no es solo patrimonio: es el símbolo de que la fortaleza de esta tierra puede sostenerse con determinación y trabajo colectivo.
+          </p>
+          <a href="#unete" class="historia__cta">Conviértete en Aliado</a>
+        </div>
+
+        <div class="historia__col historia__col--right fade-in fade-in-delay-2">
+          <img src="Fotos/vigas.png" alt="Vigas de madera sobre los arcos restaurados de Casa Talamantes" class="historia__img">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== GALERIA PREVIEW ===== -->
+    <section class="galeria-preview" id="restauracion" aria-labelledby="galeriaTitle">
+      <div class="container">
+        <div class="galeria-preview__grid">
+
+          <!-- Texto -->
+          <div class="galeria-preview__texto fade-in">
+            <div class="section-label">El proceso</div>
+            <h2 class="galeria-preview__title" id="galeriaTitle">De ruinas<br>a oportunidades</h2>
+            <p class="galeria-preview__body">Desde 2019, la hacienda ha transitado por tres momentos: el estado en que la encontramos, la reconstrucción estructural y la consolidación del espacio. Cada etapa representa trabajo colectivo y una apuesta sostenida por el futuro de Talamantes.</p>
+            <a href="#galeria-detalle" class="historia__cta">Ver el proceso completo</a>
+          </div>
+
+          <!-- Situación -->
+          <div class="galeria-preview__inicio fade-in fade-in-delay-1">
+            <div class="galeria-img-link" onclick="goToStage(0)">
+              <img src="Galeria/Situacion%20de%20la%20hacienda%20/toma%20aerea%20finca%20002.jpg" alt="Vista aérea de la hacienda antes de la restauración">
+              <div class="galeria-img-link__overlay"></div>
+              <div class="galeria-img-link__label">
+                <span class="galeria-img-link__sublabel">Estado inicial</span>
+                El legado heredado
+              </div>
+            </div>
+          </div>
+
+          <!-- Etapa 1 -->
+          <div class="galeria-preview__etapa1 fade-in fade-in-delay-2">
+            <div class="galeria-img-link" onclick="goToStage(1)">
+              <img src="Galeria/Etapa%201/WhatsApp%20Image%202022-04-13%20at%202.25.05%20PM%20(2).jpeg" alt="Restauración de arcos y estructura en Etapa 1">
+              <div class="galeria-img-link__overlay"></div>
+              <div class="galeria-img-link__label">
+                <span class="galeria-img-link__sublabel">Etapa 1</span>
+                Cimientos y estructura
+              </div>
+            </div>
+          </div>
+
+          <!-- Etapa 2 -->
+          <div class="galeria-preview__etapa2 fade-in fade-in-delay-3">
+            <div class="galeria-img-link" onclick="goToStage(2)">
+              <img src="Galeria/Etapa%202/DJI_0790.JPG" alt="Vista aérea mostrando el avance en Etapa 2">
+              <div class="galeria-img-link__overlay"></div>
+              <div class="galeria-img-link__label">
+                <span class="galeria-img-link__sublabel">Etapa 2</span>
+                Consolidación
+              </div>
+            </div>
+          </div>
+
+          <!-- Etapa 3 -->
+          <div class="galeria-preview__etapa3 fade-in fade-in-delay-4">
+            <div class="galeria-img-link" onclick="goToStage(3)">
+              <img src="Galeria/Etapa%203/arcos-talamantes.png" alt="Arcos restaurados en Etapa 3">
+              <div class="galeria-img-link__overlay"></div>
+              <div class="galeria-img-link__label">
+                <span class="galeria-img-link__sublabel">Etapa 3</span>
+                Restauración
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GALERIA DETALLE ===== -->
+    <section class="galeria-detalle" id="galeria-detalle" aria-label="Galería completa del proceso de restauración">
+      <div class="container">
+        <div class="galeria-detalle__header fade-in">
+          <h2 class="section-title">El proceso, etapa por etapa</h2>
+        </div>
+
+        <div class="galeria-tabs" role="tablist">
+          <button class="galeria-tab active" role="tab" data-stage="0">El legado heredado</button>
+          <button class="galeria-tab" role="tab" data-stage="1">Etapa 1 — Estructura</button>
+          <button class="galeria-tab" role="tab" data-stage="2">Etapa 2 — Consolidación</button>
+          <button class="galeria-tab" role="tab" data-stage="3">Etapa 3 — Restauración</button>
+        </div>
+
+        <!-- Stage 0: Situación -->
+        <div class="galeria-stage active" data-stage="0">
+          <p class="galeria-stage__intro">El estado en que encontramos la hacienda: un espacio histórico deteriorado por décadas de abandono, pero con la estructura centenaria intacta y lista para ser rescatada.</p>
+          <div class="galeria-grid">
+            <div class="galeria-grid__item"><img src="Galeria/Situacion%20de%20la%20hacienda%20/toma%20aerea%20finca%20002.jpg" alt="Toma aérea de la hacienda"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Situacion%20de%20la%20hacienda%20/Foto%20Amplia%20Interior%20Fundacion%20004.jpg" alt="Interior de la hacienda"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Situacion%20de%20la%20hacienda%20/DSCN0085.JPG" alt="Estado inicial de la hacienda"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Situacion%20de%20la%20hacienda%20/DSCN0395.JPG" alt="Estado inicial de la hacienda"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Situacion%20de%20la%20hacienda%20/DSCN0443.JPG" alt="Estado inicial de la hacienda"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Situacion%20de%20la%20hacienda%20/DSCN2688.JPG" alt="Estado inicial de la hacienda"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Situacion%20de%20la%20hacienda%20/IMG_0243.JPG" alt="Estado inicial de la hacienda"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Situacion%20de%20la%20hacienda%20/IMG_20201102_125651551.jpg" alt="Estado inicial de la hacienda"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Situacion%20de%20la%20hacienda%20/IMG_20201127_124352772_HDR.jpg" alt="Estado inicial de la hacienda"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Situacion%20de%20la%20hacienda%20/IMG_6098.jpg" alt="Estado inicial de la hacienda"></div>
+          </div>
+        </div>
+
+        <!-- Stage 1: Etapa 1 -->
+        <div class="galeria-stage" data-stage="1">
+          <p class="galeria-stage__intro">Primera etapa de intervención: limpieza estructural, rescate de los arcos y columnas originales, instalación de vigas de madera y trabajos de mampostería en los muros de adobe.</p>
+          <div class="galeria-grid">
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%201/WhatsApp%20Image%202022-04-13%20at%202.25.05%20PM%20(2).jpeg" alt="Arcos en restauración Etapa 1"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%201/vigas.png" alt="Vigas de madera Etapa 1"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%201/restauracion.png" alt="Restauración de muros Etapa 1"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%201/DSCN0018.JPG" alt="Etapa 1"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%201/DSCN0463.JPG" alt="Etapa 1"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%201/IMG_20220107_154809310.jpg" alt="Etapa 1"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%201/IMG_20220225_114831313_HDR.jpg" alt="Etapa 1"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%201/IMG_20220311_121648834_HDR.jpg" alt="Etapa 1"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%201/IMG_20220422_125431945_HDR.jpg" alt="Etapa 1"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%201/WhatsApp%20Image%202021-11-25%20at%2010.51.36%20AM.jpeg" alt="Etapa 1"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%201/WhatsApp%20Image%202021-11-25%20at%2010.51.48%20AM.jpeg" alt="Etapa 1"></div>
+          </div>
+        </div>
+
+        <!-- Stage 2: Etapa 2 -->
+        <div class="galeria-stage" data-stage="2">
+          <p class="galeria-stage__intro">Segunda etapa: techado del ala principal, trabajos de acabados, impermeabilización y consolidación de fachadas. El espacio comienza a tomar su forma definitiva.</p>
+          <div class="galeria-grid">
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%202/DJI_0790.JPG" alt="Vista aérea Etapa 2"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%202/DJI_0784.JPG" alt="Vista aérea Etapa 2"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%202/IMG_20220922_162051780.jpg" alt="Etapa 2"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%202/IMG_20230220_131321.jpg" alt="Etapa 2"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%202/WhatsApp%20Image%202022-08-02%20at%2010.12.36%20AM%20(4).jpeg" alt="Etapa 2"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%202/WhatsApp%20Image%202022-08-02%20at%2010.13.47%20AM%20(1).jpeg" alt="Etapa 2"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%202/WhatsApp%20Image%202022-11-03%20at%2011.39.51%20AM%20(1).jpeg" alt="Etapa 2"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%202/WhatsApp%20Image%202022-11-06%20at%208.31.25%20PM.jpeg" alt="Etapa 2"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%202/WhatsApp%20Image%202022-11-06%20at%208.31.29%20PM.jpeg" alt="Etapa 2"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%202/WhatsApp%20Image%202022-11-24%20at%209.21.51%20PM%20(2).jpeg" alt="Etapa 2"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%202/WhatsApp%20Image%202022-12-03%20at%206.23.49%20PM.jpeg" alt="Etapa 2"></div>
+          </div>
+        </div>
+
+        <!-- Stage 3: Etapa 3 -->
+        <div class="galeria-stage" data-stage="3">
+          <p class="galeria-stage__intro">Tercera etapa: restauración de portales y arcos de adobe, elaboración de columnas de cantera, incorporación de terrado y pretiles, capa de compresión e impermeabilización. El espacio cobra vida definitiva.</p>
+          <div class="galeria-grid">
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/arcos-talamantes.png" alt="Arcos restaurados Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/arcos-talamantes-2.png" alt="Arcos de adobe Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/Portales.jpeg" alt="Portales restaurados Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/Portales%201.jpeg" alt="Portales Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/Arcos%20Adobe%201.jpg" alt="Arcos de adobe Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/CA2-Elaboracion%20de%20columnas%20de%20cantera%20para%20%C3%A1rea%20nueva%20de%20portales.jpeg" alt="Elaboración de columnas de cantera Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/Cuartos.jpeg" alt="Cuartos Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/Cuartos%201.jpeg" alt="Cuartos Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/Capa%20de%20compresi%C3%B3n%20.jpeg" alt="Capa de compresión Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/Capa%20de%20compresi%C3%B3n%201.JPG" alt="Capa de compresión Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/Terrado%20y%20Pretiles%20.jpeg" alt="Terrado y pretiles Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/Terrado%20y%20Pretiles%201.jpeg" alt="Terrado y pretiles Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/MA1-Compra%20de%20vigas%20redondas%20de%208x20%20para%20cubierta.jpg" alt="Vigas de cubierta Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/MO5-%20Cuadrilla%20para%20incorporacion%20de%20terrado%20y%20pretiles%20en%20cubierta%20de%20salones%20y%20portales%20nuevos.jpeg" alt="Incorporación de terrado Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/MO6%20-%20Cuadrilla%20para%20incorporacion%20de%20capa%20de%20compresi%C3%B3n%20e%20impremeabilizaci%C3%B3n%20en%20cubierta%20de%20salones%20y%20portales.jpeg" alt="Impermeabilización Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/RE1-Registro%20fotografico%20antes%20y%20despues%20de%20la%20obra.jpg" alt="Antes y después Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/RE2-Registo%20visual%20a%C3%A9reo%20durenta%20la%20obra%20de%20restauracion%20(1).png" alt="Vista aérea durante la obra Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/SE2-Taller%20para%20ni%C3%B1os.JPG" alt="Taller para niños Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/SU1-Supervisi%C3%B3n%20externa%20de%20obra.jpeg" alt="Supervisión externa de obra Etapa 3"></div>
+            <div class="galeria-grid__item"><img src="Galeria/Etapa%203/DI1-Suministro%20y%20colocacion%20de%20lona%20informativa%20.jpeg" alt="Lona informativa Etapa 3"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== IMPACTO INTRO ===== -->
+    <section class="filosofia" id="impacto" aria-labelledby="impactoTitle">
+      <div class="container">
+        <div class="filosofia__inner">
+          <div class="filosofia__right fade-in">
+            <div class="filosofia__media">
+              <img src="Fotos/manualidad.png" alt="Niños en actividad de manualidades en Casa Talamantes">
+            </div>
+          </div>
+          <div class="filosofia__left fade-in fade-in-delay-1">
+            <div class="filosofia__eyebrow">Impacto y metas</div>
+            <h2 class="filosofia__title" id="impactoTitle">Construimos para<br>el largo plazo</h2>
+            <p class="filosofia__body">Cada peso invertido en Casa Talamantes tiene un destino claro: espacios habilitados, niños que aprenden, adultos mayores que comen y jóvenes que encuentran un camino propio.</p>
+            <a href="#unete" class="filosofia__link">Conviértete en Aliado &nbsp;&#8594;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== METAS ===== -->
+    <section class="section section--warm" aria-label="Metas e indicadores">
+      <div class="container">
+        <div class="metas__grid">
+
+          <div class="meta-card fade-in fade-in-delay-1">
+            <div class="meta-card__img">
+              <img src="Fotos/presupuesto.png" alt="Presupuesto y financiamiento de Casa Talamantes">
+            </div>
+            <div class="meta-card__body">
+              <h3>Presupuesto total</h3>
+              <div class="meta-card__data">
+                <div class="meta-card__data-item">
+                  <div class="meta-card__data-label">Inversión global</div>
+                  <div class="meta-card__data-value">$22.5M</div>
+                </div>
+              </div>
+              <p class="meta-card__desc">Pesos mexicanos: $5.5M obra inicial + $17M fase de expansión.</p>
+              <div class="meta-progress"><div class="meta-progress__fill meta-progress__fill--accent" data-width="38" style="width:0%"></div></div>
+            </div>
+          </div>
+
+          <div class="meta-card fade-in fade-in-delay-2">
+            <div class="meta-card__img">
+              <img src="Fotos/alimentario.png" alt="Programa alimentario en Casa Talamantes">
+            </div>
+            <div class="meta-card__body">
+              <h3>Programa alimentario</h3>
+              <div class="meta-card__data">
+                <div class="meta-card__data-item">
+                  <div class="meta-card__data-label">Personas / día</div>
+                  <div class="meta-card__data-value">60</div>
+                </div>
+                <div class="meta-card__data-item">
+                  <div class="meta-card__data-label">Meta</div>
+                  <div class="meta-card__data-value">2030</div>
+                </div>
+              </div>
+              <p class="meta-card__desc">Niños en preescolar y adultos mayores beneficiados diariamente.</p>
+              <div class="meta-progress"><div class="meta-progress__fill meta-progress__fill--accent" data-width="22" style="width:0%"></div></div>
+            </div>
+          </div>
+
+          <div class="meta-card fade-in fade-in-delay-3">
+            <div class="meta-card__img">
+              <img src="Fotos/aula-principal.JPG" alt="Aula principal de Casa Talamantes en restauración">
+            </div>
+            <div class="meta-card__body">
+              <h3>Aula principal</h3>
+              <div class="meta-card__data">
+                <div class="meta-card__data-item">
+                  <div class="meta-card__data-label">Completado</div>
+                  <div class="meta-card__data-value">70%</div>
+                </div>
+                <div class="meta-card__data-item">
+                  <div class="meta-card__data-label">Estado</div>
+                  <div class="meta-card__data-value" style="font-size:0.95rem;">Activo</div>
+                </div>
+              </div>
+              <p class="meta-card__desc">Faltan pisos, instalaciones eléctricas e hidráulicas para terminar.</p>
+              <div class="meta-progress"><div class="meta-progress__fill meta-progress__fill--primary" data-width="70" style="width:0%"></div></div>
+            </div>
+          </div>
+
+          <div class="meta-card fade-in fade-in-delay-1">
+            <div class="meta-card__img">
+              <img src="Fotos/clases.png" alt="Niños en clases en Casa Talamantes">
+            </div>
+            <div class="meta-card__body">
+              <h3>Niños en clases</h3>
+              <div class="meta-card__data">
+                <div class="meta-card__data-item">
+                  <div class="meta-card__data-label">Meta 2030</div>
+                  <div class="meta-card__data-value">40–80</div>
+                </div>
+                <div class="meta-card__data-item">
+                  <div class="meta-card__data-label">Sesiones diarias</div>
+                  <div class="meta-card__data-value">4</div>
+                </div>
+              </div>
+              <p class="meta-card__desc">Niños matriculados en actividades extracurriculares de lunes a viernes.</p>
+              <div class="meta-progress"><div class="meta-progress__fill meta-progress__fill--primary" data-width="18" style="width:0%"></div></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== IMPACTO Y TRANSPARENCIA — movido a transparencia.html ===== -->
+    <section class="transparencia section section--warm" id="transparencia" aria-labelledby="transpTitle" style="display:none">
+      <div class="container">
+
+        <div class="transparencia__intro fade-in">
+          <div class="section-label">Impacto y Transparencia</div>
+          <h2 class="transparencia__section-title" id="transpTitle">Rendición de cuentas,<br><em>en cada paso</em></h2>
+          <p class="transparencia__section-body">Creemos que la confianza se construye con evidencia. Aquí compartimos abiertamente el uso de los recursos, el impacto social generado y las noticias más recientes de Casa Talamantes.</p>
+        </div>
+
+        <!-- A. Transparencia y Rendición de Cuentas -->
+        <div class="transp-module fade-in">
+          <div class="transp-module__head">
+            <span class="transp-module__letter">A</span>
+            <span class="transp-module__title">Transparencia y Rendición de Cuentas</span>
+            <span class="transp-module__sub">Repositorio oficial de documentos</span>
+          </div>
+          <div class="transp-a__grid">
+            <div>
+              <div class="transp-a__col-title">Informes financieros disponibles</div>
+              <div class="transp-doc-btn">
+                <div class="transp-doc-btn__icon">
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div class="transp-doc-btn__info">
+                  <div class="transp-doc-btn__name">Informe Anual de Actividades 2023</div>
+                  <div class="transp-doc-btn__meta">PDF · Asoc. Javier Francisco Máynez A.C.</div>
+                </div>
+                <div class="transp-doc-btn__dl">
+                  <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </div>
+              </div>
+              <div class="transp-doc-btn">
+                <div class="transp-doc-btn__icon">
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div class="transp-doc-btn__info">
+                  <div class="transp-doc-btn__name">Informe de Avance — Primer Semestre 2024</div>
+                  <div class="transp-doc-btn__meta">PDF · Asoc. Javier Francisco Máynez A.C.</div>
+                </div>
+                <div class="transp-doc-btn__dl">
+                  <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </div>
+              </div>
+              <div class="transp-doc-btn">
+                <div class="transp-doc-btn__icon">
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div class="transp-doc-btn__info">
+                  <div class="transp-doc-btn__name">Estados Financieros Auditados 2022</div>
+                  <div class="transp-doc-btn__meta">PDF · Asoc. Javier Francisco Máynez A.C.</div>
+                </div>
+                <div class="transp-doc-btn__dl">
+                  <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </div>
+              </div>
+              <p class="transp-doc-note">* Los documentos se publicarán en cuanto sean formalizados por la asociación.</p>
+            </div>
+            <div>
+              <div class="transp-a__col-title">Destino de los recursos</div>
+              <div class="transp-chart__wrap">
+                <svg class="transp-donut" viewBox="0 0 200 200" aria-label="Distribución de recursos">
+                  <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(0,0,0,0.07)" stroke-width="28"/>
+                  <circle cx="100" cy="100" r="70" fill="none" stroke="#8B4513" stroke-width="28"
+                    stroke-dasharray="241.90 439.82" stroke-dashoffset="0"
+                    transform="rotate(-90 100 100)"/>
+                  <circle cx="100" cy="100" r="70" fill="none" stroke="#D4A853" stroke-width="28"
+                    stroke-dasharray="109.96 439.82" stroke-dashoffset="-241.90"
+                    transform="rotate(-90 100 100)"/>
+                  <circle cx="100" cy="100" r="70" fill="none" stroke="#2C5F2E" stroke-width="28"
+                    stroke-dasharray="87.96 439.82" stroke-dashoffset="-351.86"
+                    transform="rotate(-90 100 100)"/>
+                  <text x="100" y="96" text-anchor="middle" font-size="22" font-weight="700" fill="#1A1A1A" font-family="Georgia,serif">100%</text>
+                  <text x="100" y="113" text-anchor="middle" font-size="10" fill="#5A5047" font-family="system-ui,sans-serif">Transparente</text>
+                </svg>
+                <div class="transp-legend">
+                  <div class="transp-legend__item">
+                    <div class="transp-legend__dot" style="background:#8B4513"></div>
+                    <span class="transp-legend__label">Infraestructura física</span>
+                    <span class="transp-legend__pct">55%</span>
+                  </div>
+                  <div class="transp-legend__item">
+                    <div class="transp-legend__dot" style="background:#D4A853"></div>
+                    <span class="transp-legend__label">Equipamiento tecnológico</span>
+                    <span class="transp-legend__pct">25%</span>
+                  </div>
+                  <div class="transp-legend__item">
+                    <div class="transp-legend__dot" style="background:#2C5F2E"></div>
+                    <span class="transp-legend__label">Programas educativos</span>
+                    <span class="transp-legend__pct">20%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- B. Retribución Social en Acción -->
+        <div class="transp-module fade-in">
+          <div class="transp-module__head">
+            <span class="transp-module__letter">B</span>
+            <span class="transp-module__title">Retribución Social en Acción</span>
+            <span class="transp-module__sub">Beneficio social directo para la comunidad</span>
+          </div>
+          <div class="retrib-tabs" role="tablist">
+            <button class="retrib-tab active" role="tab" data-panel="0">Apoyos Comunitarios</button>
+            <button class="retrib-tab" role="tab" data-panel="1">Deporte Local</button>
+            <button class="retrib-tab" role="tab" data-panel="2">Eventos y Talleres</button>
+          </div>
+
+          <div class="retrib-panel active" data-panel="0">
+            <p class="retrib-panel__intro">Coordinación logística y entrega de equipamiento e insumos a organismos de protección civil y grupos comunitarios del municipio, fortaleciendo la seguridad y resiliencia local.</p>
+            <div class="retrib-grid">
+              <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Retribuci%C3%B3n%20Social/Apoyos1.jpg" alt="Apoyos comunitarios"></div>
+              <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Retribuci%C3%B3n%20Social/Apoyos2.jpg" alt="Apoyos comunitarios"></div>
+              <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Retribuci%C3%B3n%20Social/Apoyos3.jpg" alt="Apoyos comunitarios"></div>
+              <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Retribuci%C3%B3n%20Social/Apoyos4.jpg" alt="Apoyos comunitarios"></div>
+            </div>
+          </div>
+
+          <div class="retrib-panel" data-panel="1">
+            <p class="retrib-panel__intro">Entrega de insumos deportivos, uniformes y patrocinio de ligas y torneos juveniles orientados a apartar a la juventud del rezago social y fomentar una cultura de esfuerzo y comunidad.</p>
+            <div class="retrib-grid">
+              <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Retribuci%C3%B3n%20Social/Apoyos5.jpg" alt="Deporte local"></div>
+              <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Retribuci%C3%B3n%20Social/Apoyos6.jpg" alt="Deporte local"></div>
+              <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Retribuci%C3%B3n%20Social/Apoyos7.jpeg" alt="Deporte local"></div>
+              <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Retribuci%C3%B3n%20Social/Apoyos8.jpg" alt="Deporte local"></div>
+              <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Retribuci%C3%B3n%20Social/Apoyos9.jpeg" alt="Deporte local"></div>
+            </div>
+          </div>
+
+          <div class="retrib-panel" data-panel="2">
+            <p class="retrib-panel__intro">Actividades recreativas y formativas organizadas en Casa Talamantes: talleres artesanales, proyecciones culturales y visitas académicas que convierten el espacio en un núcleo vivo de la comunidad.</p>
+            <div class="retrib-event-section">
+              <div class="retrib-event-section__title">Taller "Pintando con cal"</div>
+              <div class="retrib-grid">
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20_Pintando%20con%20cal_/cal-01.png" alt="Taller pintando con cal"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20_Pintando%20con%20cal_/cal-02.png" alt="Taller pintando con cal"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20_Pintando%20con%20cal_/cal-3.png" alt="Taller pintando con cal"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20_Pintando%20con%20cal_/cal-4.jpg" alt="Taller pintando con cal"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20_Pintando%20con%20cal_/cal-5.png" alt="Taller pintando con cal"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20_Pintando%20con%20cal_/cal-6.png" alt="Taller pintando con cal"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20_Pintando%20con%20cal_/cal-7.png" alt="Taller pintando con cal"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20_Pintando%20con%20cal_/cal-8.png" alt="Taller pintando con cal"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20_Pintando%20con%20cal_/pincal9.png" alt="Taller pintando con cal"></div>
+              </div>
+            </div>
+            <div class="retrib-event-section">
+              <div class="retrib-event-section__title">Taller "Construyendo con tierra"</div>
+              <div class="retrib-grid">
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20construyendo%20con%20tierra/tierra-01.png" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20construyendo%20con%20tierra/tierra-02.png" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20construyendo%20con%20tierra/tierra-03.png" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20construyendo%20con%20tierra/tierra-04.png" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20construyendo%20con%20tierra/tierra-05.jpg" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20construyendo%20con%20tierra/tierra-06.jpg" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20construyendo%20con%20tierra/tierra-07.png" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20construyendo%20con%20tierra/tierra-08.jpg" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20construyendo%20con%20tierra/tierra-09.jpg" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20construyendo%20con%20tierra/tierra-10.png" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20construyendo%20con%20tierra/tierra-12.jpg" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Taller%20construyendo%20con%20tierra/tierra-14.png" alt="Taller construyendo con tierra"></div>
+
+              </div>
+            </div>
+            <div class="retrib-event-section">
+              <div class="retrib-event-section__title">Visita: Diplomado de Gestión del Patrimonio Cultural y Arquitecturas del Norte de México</div>
+              <div class="retrib-grid">
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Visita%20_Diplomado%20de%20gesti%C3%B3n%20del%20patrimonio%20cultural%20y%20arquitecturas%20del%20norte%20de%20M%C3%A9xico_/Diplomadotec1.png" alt="Visita diplomado patrimonio"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Visita%20_Diplomado%20de%20gesti%C3%B3n%20del%20patrimonio%20cultural%20y%20arquitecturas%20del%20norte%20de%20M%C3%A9xico_/diplomadotec2.png" alt="Visita diplomado patrimonio"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Visita%20_Diplomado%20de%20gesti%C3%B3n%20del%20patrimonio%20cultural%20y%20arquitecturas%20del%20norte%20de%20M%C3%A9xico_/diplomadotec3.png" alt="Visita diplomado patrimonio"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Visita%20_Diplomado%20de%20gesti%C3%B3n%20del%20patrimonio%20cultural%20y%20arquitecturas%20del%20norte%20de%20M%C3%A9xico_/diplomadotec4.png" alt="Visita diplomado patrimonio"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Visita%20_Diplomado%20de%20gesti%C3%B3n%20del%20patrimonio%20cultural%20y%20arquitecturas%20del%20norte%20de%20M%C3%A9xico_/diplomadotec5.png" alt="Visita diplomado patrimonio"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Visita%20_Diplomado%20de%20gesti%C3%B3n%20del%20patrimonio%20cultural%20y%20arquitecturas%20del%20norte%20de%20M%C3%A9xico_/diplomadotec6.png" alt="Visita diplomado patrimonio"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Visita%20_Diplomado%20de%20gesti%C3%B3n%20del%20patrimonio%20cultural%20y%20arquitecturas%20del%20norte%20de%20M%C3%A9xico_/diplomadotec7.png" alt="Visita diplomado patrimonio"></div>
+                <div class="retrib-grid__item"><img src="Retribuci%C3%B3n%20social/Visita%20_Diplomado%20de%20gesti%C3%B3n%20del%20patrimonio%20cultural%20y%20arquitecturas%20del%20norte%20de%20M%C3%A9xico_/diplomadotec8.png" alt="Visita diplomado patrimonio"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- C. Actualidad y Sala de Prensa -->
+        <div class="transp-module fade-in">
+          <div class="transp-module__head">
+            <span class="transp-module__letter">C</span>
+            <span class="transp-module__title">Actualidad y Sala de Prensa</span>
+            <span class="transp-module__sub">Últimas noticias del proyecto</span>
+          </div>
+          <div class="prensa-grid">
+            <div class="prensa-card">
+              <div class="prensa-card__thumb prensa-card__thumb--1">
+                <svg viewBox="0 0 24 24"><path d="M4 22V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v18"/><path d="M2 22h20"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+              </div>
+              <div class="prensa-card__body">
+                <div class="prensa-card__date">10 Jun 2025</div>
+                <h4 class="prensa-card__title">Arrancan los trabajos de planeación para la nueva fase de inversión de $17 millones</h4>
+                <a href="#" class="prensa-card__btn">Leer más <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+              </div>
+            </div>
+            <div class="prensa-card">
+              <div class="prensa-card__thumb prensa-card__thumb--2">
+                <svg viewBox="0 0 24 24"><path d="M4 22V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v18"/><path d="M2 22h20"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+              </div>
+              <div class="prensa-card__body">
+                <div class="prensa-card__date">15 Mar 2025</div>
+                <h4 class="prensa-card__title">Secretaría de Cultura reconoce preservación patrimonial de Casa Talamantes a través del Programa Eká</h4>
+                <a href="#" class="prensa-card__btn">Leer más <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+              </div>
+            </div>
+            <div class="prensa-card">
+              <div class="prensa-card__thumb prensa-card__thumb--3">
+                <svg viewBox="0 0 24 24"><path d="M4 22V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v18"/><path d="M2 22h20"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+              </div>
+              <div class="prensa-card__body">
+                <div class="prensa-card__date">20 Ene 2025</div>
+                <h4 class="prensa-card__title">Más de 80 niños participan en los talleres educativos del primer semestre 2025</h4>
+                <a href="#" class="prensa-card__btn">Leer más <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+              </div>
+            </div>
+          </div>
+          <p class="prensa-note">* Las notas de prensa serán actualizadas periódicamente por el equipo de comunicación de Casa Talamantes.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== ALIANZA EKÁ ===== -->
+    <section class="fechac-section" aria-label="Alianza estratégica Programa Eká">
+      <div class="fechac-section__overlay"></div>
+      <div class="container fechac-section__content fade-in">
+        <p class="fechac-section__eyebrow">Alianza estratégica</p>
+        <h3 class="fechac-section__title">Respaldados por el Gobierno del Estado de Chihuahua</h3>
+        <p class="fechac-section__body">La Secretaría de Cultura del Estado de Chihuahua, a través del programa de estímulos fiscales Eká, respalda las Etapas 1, 2 y 3 con una aportación de $3.3M de los $5.5M del costo total consolidado de la obra inicial.</p>
+        <div class="fechac-scheme">
+          <div class="fechac-scheme__item">
+            <div class="fechac-scheme__pct">60%</div>
+            <div class="fechac-scheme__label">Programa Eká</div>
+          </div>
+          <div class="fechac-scheme__divider">+</div>
+          <div class="fechac-scheme__item">
+            <div class="fechac-scheme__pct">40%</div>
+            <div class="fechac-scheme__label">Casa Talamantes</div>
+          </div>
+          <div class="fechac-scheme__divider">=</div>
+          <div class="fechac-scheme__item">
+            <div class="fechac-scheme__pct" style="color:#5AA85D;">100%</div>
+            <div class="fechac-scheme__label">Compromiso con la Cultura</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ALIADOS ===== -->
+    <section class="section section--warm" id="aliados" aria-labelledby="aliadosTitle">
+      <div class="container">
+        <div class="aliados__grid">
+          <div class="aliados__why fade-in">
+            <div class="section-label">Por qué sumarte</div>
+            <h2 id="aliadosTitle">Tu inversión transforma una generación completa</h2>
+            <div class="divider"></div>
+            <p>Invierte en la única infraestructura educativa integral que existe en un municipio de alta vulnerabilidad social.</p>
+            <p>Ayúdanos a construir un México donde las oportunidades no estén determinadas por el lugar en el que naces ni por los recursos con los que cuentas. Un México que aleje a su juventud del narcotráfico y les ofrezca una formación integral y de largo plazo, para que sus jóvenes encuentren oportunidades reales en campos innovadores como la Tecnología y la Inteligencia Artificial.</p>
+            <a href="#unete" class="btn btn--accent" style="margin-top:var(--spacing-sm);">Quiero ser aliado</a>
+          </div>
+          <div class="fade-in fade-in-delay-2">
+            <div class="section-label">Beneficios de ser aliado</div>
+            <div class="beneficios">
+              <div class="beneficio-item">
+                <div class="beneficio-item__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <div>
+                  <h4>Transparencia total</h4>
+                  <p>Reportes periódicos de avance, uso de recursos y resultados medibles respaldados por FECHAC.</p>
+                </div>
+              </div>
+              <div class="beneficio-item">
+                <div class="beneficio-item__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                </div>
+                <div>
+                  <h4>Impacto verificable</h4>
+                  <p>Cada etapa tiene indicadores claros: niños matriculados, sesiones impartidas, personas alimentadas.</p>
+                </div>
+              </div>
+              <div class="beneficio-item">
+                <div class="beneficio-item__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div>
+                  <h4>Comunidad de aliados</h4>
+                  <p>Acceso a una red de empresarios y organizaciones comprometidas con el desarrollo regional de Chihuahua.</p>
+                </div>
+              </div>
+              <div class="beneficio-item">
+                <div class="beneficio-item__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                </div>
+                <div>
+                  <h4>Visibilidad institucional</h4>
+                  <p>Reconocimiento en comunicaciones del proyecto, sitio web y materiales institucionales de Casa Talamantes.</p>
+                </div>
+              </div>
+              <div class="beneficio-item">
+                <div class="beneficio-item__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <div>
+                  <h4>Deducibilidad fiscal</h4>
+                  <p>La asociación trabaja para definir un perfil fiscal que permita deducción de impuestos a donadores.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA + FORMULARIO ===== -->
+    <section class="cta-section" id="unete" aria-labelledby="ctaTitle">
+      <div class="container">
+        <div class="cta-section__inner">
+          <div class="cta-section__content fade-in">
+            <div class="section-label" style="color:var(--color-secondary);">Actúa ahora</div>
+            <h2 id="ctaTitle">Únete al proyecto.<br><em>Tú puedes hacer la diferencia.</em></h2>
+            <p>Si eres empresario, fundación, profesional o individuo que cree en la educación como motor de cambio, Casa Talamantes tiene un lugar para ti. Escríbenos y encontremos juntos la mejor forma de colaborar.</p>
+            <div class="contact-ways">
+              <a href="mailto:Info@javierfranciscomaynez.org" class="contact-way">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Info@javierfranciscomaynez.org
+              </a>
+              <a href="tel:+525565881725" class="contact-way">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.44 2 2 0 0 1 3.57 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                55 6588 1725
+              </a>
+              <a href="https://javierfranciscomaynez.org" target="_blank" rel="noopener noreferrer" class="contact-way">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                javierfranciscomaynez.org
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=100071658002873" target="_blank" rel="noopener noreferrer" class="contact-way">
+                <svg viewBox="0 0 24 24" aria-hidden="true" style="fill:var(--color-secondary);stroke:none;"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                Casa Talamantes en Facebook
+              </a>
+            </div>
+          </div>
+
+          <div class="fade-in fade-in-delay-2">
+            <div class="form-card">
+              <div id="formContent">
+                <h3>Envíanos un mensaje</h3>
+                <form id="contactForm" novalidate aria-label="Formulario de contacto">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="fieldNombre">Nombre</label>
+                      <input type="text" id="fieldNombre" name="nombre" placeholder="Tu nombre" autocomplete="given-name">
+                      <div class="form-error" id="errorNombre">Por favor ingresa tu nombre.</div>
+                    </div>
+                    <div class="form-group">
+                      <label for="fieldApellido">Apellido</label>
+                      <input type="text" id="fieldApellido" name="apellido" placeholder="Tu apellido" autocomplete="family-name">
+                      <div class="form-error" id="errorApellido">Por favor ingresa tu apellido.</div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="fieldEmail">Correo electrónico</label>
+                    <input type="email" id="fieldEmail" name="email" placeholder="tucorreo@ejemplo.com" autocomplete="email">
+                    <div class="form-error" id="errorEmail">Ingresa un correo electronico valido.</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="fieldTipo">¿Cómo quieres colaborar?</label>
+                    <select id="fieldTipo" name="tipo">
+                      <option value="">Selecciona una opción</option>
+                      <option value="donacion">Donación económica</option>
+                      <option value="empresa">Alianza empresarial</option>
+                      <option value="voluntariado">Voluntariado</option>
+                      <option value="especie">Donación en especie</option>
+                      <option value="informacion">Solo quiero información</option>
+                    </select>
+                    <div class="form-error" id="errorTipo">Por favor selecciona una opción.</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="fieldMensaje">Mensaje</label>
+                    <textarea id="fieldMensaje" name="mensaje" placeholder="Cuéntanos sobre ti o tu organización y cómo te gustaría participar..."></textarea>
+                    <div class="form-error" id="errorMensaje">Por favor escribe un mensaje.</div>
+                  </div>
+                  <button type="submit" class="form-submit" id="formSubmitBtn">Enviar mensaje</button>
+                </form>
+              </div>
+              <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+                <div class="form-success__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <h4>Mensaje enviado</h4>
+                <p>Gracias por tu interes en Casa Talamantes. Nos pondremos en contacto contigo muy pronto.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo-title">Casa Talamantes</div>
+          <div class="footer__logo-sub">Asoc. Javier Francisco Máynez A.C.</div>
+          <p class="footer__tagline">Educación, cultura y esperanza para los niños y jóvenes del Municipio de Allende, Chihuahua. Fundada en 2019.</p>
+          <p style="font-size:0.75rem;color:rgba(250,247,242,0.25);margin-top:var(--spacing-xs);">Asociación Civil · Sin fines de lucro · JFMAC</p>
+        </div>
+        <div class="footer__col">
+          <h4>Navegación</h4>
+          <ul class="footer__links">
+            <li><a href="#quienes-somos">Quiénes Somos</a></li>
+            <li><a href="#programas">Programas</a></li>
+            <li><a href="#impacto">Impacto y Metas</a></li>
+            <li><a href="#aliados">Por qué ser Aliado</a></li>
+            <li><a href="#unete">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Contacto</h4>
+          <a href="mailto:Info@javierfranciscomaynez.org" class="footer__contact-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Info@javierfranciscomaynez.org
+          </a>
+          <a href="tel:+525565881725" class="footer__contact-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.44 2 2 0 0 1 3.57 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            55 6588 1725
+          </a>
+          <a href="https://javierfranciscomaynez.org" target="_blank" rel="noopener noreferrer" class="footer__contact-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            javierfranciscomaynez.org
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=100071658002873" target="_blank" rel="noopener noreferrer" class="footer__contact-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true" style="fill:var(--color-secondary);stroke:none;"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            Casa Talamantes en Facebook
+          </a>
+          <p class="footer__contact-item" style="cursor:default;">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Talamantes, Allende, Chihuahua
+          </p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 Asociación Javier Francisco Máynez A.C. Todos los derechos reservados.</p>
+        <div class="footer__bottom-links">
+          <a href="mailto:Info@javierfranciscomaynez.org">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Cerrar">&times;</button>
+    <button class="lightbox__btn lightbox__prev" id="lightboxPrev" aria-label="Anterior">&#8249;</button>
+    <img class="lightbox__img" id="lightboxImg" src="" alt="">
+    <button class="lightbox__btn lightbox__next" id="lightboxNext" aria-label="Siguiente">&#8250;</button>
+    <span class="lightbox__counter" id="lightboxCounter"></span>
+  </div>
+
+  <script>
+    // =====================
+    // NAVIGATION SCROLL
+    // =====================
+    const mainNav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        mainNav.classList.add('scrolled');
+      } else {
+        mainNav.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    // =====================
+    // MOBILE MENU
+    // =====================
+    const hamburger = document.getElementById('navHamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileClose = document.getElementById('mobileClose');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    function openMenu() {
+      mobileMenu.classList.add('open');
+      hamburger.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', () => {
+      if (mobileMenu.classList.contains('open')) closeMenu();
+      else openMenu();
+    });
+    mobileClose.addEventListener('click', closeMenu);
+    mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) closeMenu();
+    });
+
+    // =====================
+    // INTERSECTION OBSERVER — FADE IN
+    // =====================
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    fadeEls.forEach(el => fadeObserver.observe(el));
+
+    // =====================
+    // PROGRESS BARS ANIMATION
+    // =====================
+    const progressBars = document.querySelectorAll('[data-width]');
+    const progressObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const bar = entry.target;
+          const targetWidth = bar.getAttribute('data-width');
+          setTimeout(() => {
+            bar.style.width = targetWidth + '%';
+          }, 200);
+          progressObserver.unobserve(bar);
+        }
+      });
+    }, { threshold: 0.2 });
+    progressBars.forEach(bar => progressObserver.observe(bar));
+
+    // =====================
+    // CONTACT FORM VALIDATION
+    // =====================
+    const form = document.getElementById('contactForm');
+    const formSuccess = document.getElementById('formSuccess');
+    const formContent = document.getElementById('formContent');
+    const submitBtn = document.getElementById('formSubmitBtn');
+
+    function showError(fieldId, errorId, show) {
+      const field = document.getElementById(fieldId);
+      const error = document.getElementById(errorId);
+      if (show) {
+        field.classList.add('error');
+        error.classList.add('visible');
+      } else {
+        field.classList.remove('error');
+        error.classList.remove('visible');
+      }
+    }
+
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    // Clear errors on input
+    ['fieldNombre', 'fieldApellido', 'fieldEmail', 'fieldTipo', 'fieldMensaje'].forEach(id => {
+      const el = document.getElementById(id);
+      el.addEventListener('input', () => el.classList.remove('error'));
+      el.addEventListener('change', () => el.classList.remove('error'));
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nombre = document.getElementById('fieldNombre').value.trim();
+      const apellido = document.getElementById('fieldApellido').value.trim();
+      const email = document.getElementById('fieldEmail').value.trim();
+      const tipo = document.getElementById('fieldTipo').value;
+      const mensaje = document.getElementById('fieldMensaje').value.trim();
+
+      let valid = true;
+
+      if (!nombre) { showError('fieldNombre', 'errorNombre', true); valid = false; }
+      else showError('fieldNombre', 'errorNombre', false);
+
+      if (!apellido) { showError('fieldApellido', 'errorApellido', true); valid = false; }
+      else showError('fieldApellido', 'errorApellido', false);
+
+      if (!email || !validateEmail(email)) { showError('fieldEmail', 'errorEmail', true); valid = false; }
+      else showError('fieldEmail', 'errorEmail', false);
+
+      if (!tipo) { showError('fieldTipo', 'errorTipo', true); valid = false; }
+      else showError('fieldTipo', 'errorTipo', false);
+
+      if (!mensaje || mensaje.length < 10) { showError('fieldMensaje', 'errorMensaje', true); valid = false; }
+      else showError('fieldMensaje', 'errorMensaje', false);
+
+      if (!valid) return;
+
+      // Simulate submission
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+
+      setTimeout(() => {
+        formContent.style.display = 'none';
+        formSuccess.classList.add('visible');
+      }, 900);
+    });
+
+    // =====================
+    // SMOOTH SCROLL FOR ANCHOR LINKS
+    // =====================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          const navHeight = mainNav.offsetHeight;
+          const targetTop = target.getBoundingClientRect().top + window.scrollY - navHeight - 16;
+          window.scrollTo({ top: targetTop, behavior: 'smooth' });
+        }
+      });
+    });
+    // ── CARRUSEL PROGRAMAS ───────────────────────────────────
+    const grid = document.getElementById('programasGrid');
+    const scrollAmount = () => grid.querySelector('.programa-card').offsetWidth + 12;
+    document.getElementById('carouselPrev').addEventListener('click', () => {
+      grid.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+    });
+    document.getElementById('carouselNext').addEventListener('click', () => {
+      grid.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+    });
+
+    // ── GALERÍA ──────────────────────────────────────────────
+    const gbTabs   = document.querySelectorAll('.galeria-tab');
+    const gbStages = document.querySelectorAll('.galeria-stage');
+
+    function activateStage(index) {
+      gbTabs.forEach(t => t.classList.remove('active'));
+      gbStages.forEach(s => s.classList.remove('active'));
+      gbTabs[index].classList.add('active');
+      gbStages[index].classList.add('active');
+    }
+
+    gbTabs.forEach((tab, i) => tab.addEventListener('click', () => activateStage(i)));
+
+    function goToStage(index) {
+      activateStage(index);
+      const target = document.getElementById('galeria-detalle');
+      const navH   = document.getElementById('mainNav').offsetHeight;
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - navH, behavior: 'smooth' });
+    }
+
+    // ── RETRIBUCIÓN SOCIAL TABS ──────────────────────────────
+    const retribTabs   = document.querySelectorAll('.retrib-tab');
+    const retribPanels = document.querySelectorAll('.retrib-panel');
+    retribTabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        retribTabs.forEach(t => t.classList.remove('active'));
+        retribPanels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        retribPanels[i].classList.add('active');
+      });
+    });
+
+    // ── LIGHTBOX ─────────────────────────────────────────────
+    const lightbox       = document.getElementById('lightbox');
+    const lightboxImg    = document.getElementById('lightboxImg');
+    const lightboxCounter= document.getElementById('lightboxCounter');
+    let lbImages = [], lbIndex = 0;
+
+    function openLightbox(srcs, i) {
+      lbImages = srcs; lbIndex = i;
+      lightboxImg.src = lbImages[lbIndex];
+      lightboxCounter.textContent = (lbIndex + 1) + ' / ' + lbImages.length;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function lbMove(dir) {
+      lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+      lightboxImg.src = lbImages[lbIndex];
+      lightboxCounter.textContent = (lbIndex + 1) + ' / ' + lbImages.length;
+    }
+
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    document.getElementById('lightboxPrev').addEventListener('click', () => lbMove(-1));
+    document.getElementById('lightboxNext').addEventListener('click', () => lbMove(1));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'ArrowLeft')  lbMove(-1);
+      if (e.key === 'ArrowRight') lbMove(1);
+      if (e.key === 'Escape')     closeLightbox();
+    });
+
+    // Bind lightbox to retribución social images (per event section)
+    document.querySelectorAll('.retrib-event-section, .retrib-panel[data-panel="0"], .retrib-panel[data-panel="1"]').forEach(group => {
+      const imgs = Array.from(group.querySelectorAll('.retrib-grid__item img'));
+      const srcs = imgs.map(img => img.src);
+      imgs.forEach((img, i) => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => openLightbox(srcs, i));
+      });
+    });
+
+    // Bind lightbox to all gallery images (each stage has its own image list)
+    gbStages.forEach(stage => {
+      const imgs = Array.from(stage.querySelectorAll('.galeria-grid__item img'));
+      const srcs = imgs.map(img => img.src);
+      imgs.forEach((img, i) => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => openLightbox(srcs, i));
+      });
+    });
+  </script>
+</body>
+</html>

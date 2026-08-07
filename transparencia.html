@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Casa Talamantes — Impacto y Transparencia. Rendición de cuentas, retribución social y sala de prensa de la Asociación Javier Francisco Máynez A.C.">
+  <title>Impacto y Transparencia — Casa Talamantes</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+    :root {
+      --color-primary: #8B4513;
+      --color-primary-dark: #6B3410;
+      --color-primary-light: #A85520;
+      --color-secondary: #D4A853;
+      --color-secondary-light: #E8C27A;
+      --color-accent: #2C5F2E;
+      --color-accent-light: #3A7A3D;
+      --color-bg: #FAF7F2;
+      --color-bg-warm: #F5EFE6;
+      --color-bg-dark: #1C0F08;
+      --color-text: #1A1A1A;
+      --color-text-muted: #5A5047;
+      --color-text-light: #FAF7F2;
+      --color-border: #DDD0C0;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2.5rem;
+      --spacing-xl: 4rem;
+      --spacing-2xl: 6rem;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.16);
+      --transition: 0.3s ease;
+      --max-width: 1120px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: var(--font-body); background-color: var(--color-bg); color: var(--color-text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    .container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-md); }
+    .section-label { display: inline-block; font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: var(--spacing-sm); }
+    .section--warm { background: var(--color-bg-warm); }
+    .section { padding: var(--spacing-2xl) 0; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: var(--spacing-md) 0; transition: background var(--transition), box-shadow var(--transition), padding var(--transition); background: rgba(28,15,8,0.96); box-shadow: 0 1px 24px rgba(0,0,0,0.25); }
+    .nav.scrolled { padding: 0.75rem 0; }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-md); }
+    .nav__logo { display: flex; flex-direction: row; align-items: center; gap: 0.65rem; line-height: 1; }
+    .nav__logo-img { height: 50px; width: auto; flex-shrink: 0; filter: brightness(0) saturate(100%) invert(72%) sepia(40%) saturate(600%) hue-rotate(5deg) brightness(105%); transition: filter var(--transition); }
+    .nav__logo-text { display: flex; flex-direction: column; }
+    .nav__logo-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--color-bg); letter-spacing: 0.02em; }
+    .nav__logo-sub { font-size: 0.62rem; font-weight: 400; color: var(--color-secondary); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 5px; }
+    .nav__links { display: flex; align-items: center; gap: var(--spacing-lg); }
+    .nav__links a { font-size: 0.85rem; font-weight: 500; color: rgba(250,247,242,0.85); letter-spacing: 0.04em; transition: color var(--transition); position: relative; white-space: nowrap; }
+    .nav__links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--color-secondary); transition: width var(--transition); }
+    .nav__links a:hover { color: var(--color-secondary); }
+    .nav__links a:hover::after { width: 100%; }
+    .nav__links a.nav__current { color: var(--color-secondary); }
+    .nav__links a.nav__current::after { width: 100%; }
+    .nav__cta { display: inline-flex; align-items: center; padding: 0.5rem 1.25rem; background: var(--color-secondary); color: var(--color-bg-dark) !important; font-size: 0.82rem !important; font-weight: 600 !important; border-radius: var(--radius-sm); transition: background var(--transition), transform var(--transition) !important; }
+    .nav__cta::after { display: none !important; }
+    .nav__cta:hover { background: var(--color-secondary-light) !important; transform: translateY(-1px); }
+    .nav__hamburger { display: none; flex-direction: column; gap: 5px; padding: 4px; background: none; border: none; cursor: pointer; }
+    .nav__hamburger span { display: block; width: 24px; height: 2px; background: var(--color-bg); border-radius: 2px; transition: var(--transition); }
+    .nav__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav__hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* PAGE HERO */
+    .page-hero {
+      position: relative;
+      padding: 10rem 0 4.5rem;
+      background: var(--color-bg-dark);
+      overflow: hidden;
+    }
+    .page-hero__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('Fotos/fondo-2.png');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.18;
+    }
+    .page-hero__content {
+      position: relative;
+      z-index: 1;
+    }
+    .page-hero__label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-secondary);
+      margin-bottom: 1rem;
+    }
+    .page-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 400;
+      color: var(--color-bg);
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+    .page-hero__title em { font-style: italic; color: var(--color-secondary); }
+    .page-hero__sub {
+      font-size: 0.95rem;
+      color: rgba(250,247,242,0.6);
+      max-width: 520px;
+      line-height: 1.75;
+    }
+
+    /* IMPACTO Y TRANSPARENCIA */
+    .transparencia { padding: clamp(4rem, 8vw, 7rem) 0; }
+    .transparencia__intro { max-width: 680px; margin: 0 auto var(--spacing-2xl); text-align: center; }
+    .transparencia__section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400; color: var(--color-text); margin-bottom: var(--spacing-sm); }
+    .transparencia__section-body { color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.8; }
+    .transp-module { margin-bottom: clamp(3rem, 6vw, 5rem); }
+    .transp-module__head { display: flex; align-items: baseline; gap: 1rem; padding-bottom: var(--spacing-sm); border-bottom: 2px solid var(--color-border); margin-bottom: var(--spacing-lg); flex-wrap: wrap; }
+    .transp-module__letter { font-family: var(--font-display); font-size: 1.6rem; color: var(--color-secondary); font-weight: 700; line-height: 1; }
+    .transp-module__title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--color-text); }
+    .transp-module__sub { font-size: 0.78rem; color: var(--color-text-muted); margin-left: auto; }
+    .transp-a__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-xl); align-items: start; }
+    .transp-a__col-title { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-text-muted); margin-bottom: var(--spacing-md); }
+    .transp-doc-btn { display: flex; align-items: center; gap: var(--spacing-sm); padding: 0.9rem var(--spacing-md); background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-md); margin-bottom: 0.75rem; transition: border-color var(--transition), box-shadow var(--transition); cursor: default; text-decoration: none; color: inherit; }
+    a.transp-doc-btn { cursor: pointer; }
+    .transp-doc-btn:hover { border-color: var(--color-primary); box-shadow: var(--shadow-sm); }
+    .transp-doc-btn__icon { width: 38px; height: 38px; background: var(--color-primary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .transp-doc-btn__icon svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .transp-doc-btn__info { flex: 1; }
+    .transp-doc-btn__name { font-size: 0.88rem; font-weight: 600; color: var(--color-text); line-height: 1.3; }
+    .transp-doc-btn__meta { font-size: 0.73rem; color: var(--color-text-muted); margin-top: 2px; }
+    .transp-doc-btn__dl { color: var(--color-text-muted); display: flex; align-items: center; }
+    .transp-doc-btn__dl svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .transp-doc-note { font-size: 0.75rem; color: var(--color-text-muted); margin-top: var(--spacing-sm); font-style: italic; }
+    .transp-chart__wrap { display: flex; align-items: center; gap: var(--spacing-lg); }
+    .transp-donut { flex-shrink: 0; width: 160px; height: 160px; }
+    .transp-legend { flex: 1; }
+    .transp-legend__item { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.9rem; }
+    .transp-legend__dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .transp-legend__label { font-size: 0.83rem; color: var(--color-text-muted); flex: 1; line-height: 1.3; }
+    .transp-legend__pct { font-size: 0.9rem; font-weight: 700; color: var(--color-text); }
+    .retrib-tabs { display: flex; border-bottom: 2px solid var(--color-border); margin-bottom: var(--spacing-lg); overflow-x: auto; }
+    .retrib-tab { padding: 0.65rem 1.25rem; font-size: 0.82rem; font-weight: 600; color: var(--color-text-muted); background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; cursor: pointer; white-space: nowrap; transition: color var(--transition); }
+    .retrib-tab:hover { color: var(--color-primary); }
+    .retrib-tab.active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+    .retrib-panel { display: none; }
+    .retrib-panel.active { display: block; }
+    .retrib-panel__intro { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.8; margin-bottom: var(--spacing-lg); max-width: 720px; }
+    .retrib-grid { columns: 4; column-gap: 10px; }
+    .retrib-grid__item { break-inside: avoid; margin-bottom: 10px; border-radius: var(--radius-sm); overflow: hidden; }
+    .retrib-grid__item img { width: 100%; display: block; transition: transform 0.4s ease; }
+    .retrib-grid__item:hover img { transform: scale(1.03); }
+    .retrib-event-section { margin-bottom: var(--spacing-lg); }
+    .retrib-event-section:last-child { margin-bottom: 0; }
+    .retrib-event-section__title { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--color-text); margin-bottom: var(--spacing-sm); padding-bottom: 0.4rem; border-bottom: 1px solid var(--color-border); }
+    .prensa-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-md); }
+    .prensa-card { border-radius: var(--radius-md); overflow: hidden; background: #fff; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border); transition: box-shadow var(--transition), transform var(--transition); }
+    .prensa-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+    .prensa-card__thumb { width: 100%; height: 180px; display: flex; align-items: center; justify-content: center; }
+    .prensa-card__thumb--1 { background: linear-gradient(135deg, #6B3410 0%, #A85520 100%); }
+    .prensa-card__thumb--2 { background: linear-gradient(135deg, #1C3A1D 0%, #2C5F2E 100%); }
+    .prensa-card__thumb--3 { background: linear-gradient(135deg, #3A2A0E 0%, #8B4513 100%); }
+    .prensa-card__thumb svg { width: 40px; height: 40px; stroke: rgba(255,255,255,0.3); fill: none; stroke-width: 1.5; }
+    .prensa-card__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .prensa-card__body { padding: var(--spacing-md); }
+    .prensa-card__date { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-secondary); margin-bottom: 0.5rem; }
+    .prensa-card__title { font-family: var(--font-display); font-size: 0.98rem; font-weight: 600; color: var(--color-text); line-height: 1.45; margin-bottom: var(--spacing-sm); }
+    .prensa-card__btn { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; font-weight: 600; color: var(--color-primary); letter-spacing: 0.04em; text-transform: uppercase; transition: gap var(--transition); }
+    .prensa-card__btn:hover { gap: 0.55rem; }
+    .prensa-card__btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .prensa-note { margin-top: var(--spacing-lg); text-align: center; font-size: 0.8rem; color: var(--color-text-muted); font-style: italic; }
+
+    /* FOOTER */
+    .footer { background: var(--color-bg-dark); border-top: 1px solid rgba(212,168,83,0.12); padding: var(--spacing-xl) 0 var(--spacing-lg); }
+    .footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--spacing-xl); margin-bottom: var(--spacing-xl); }
+    .footer__brand { max-width: 280px; }
+    .footer__logo-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--color-bg); margin-bottom: 4px; }
+    .footer__logo-sub { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-secondary); margin-bottom: var(--spacing-sm); }
+    .footer__tagline { font-size: 0.85rem; color: rgba(250,247,242,0.5); line-height: 1.65; margin-bottom: var(--spacing-md); }
+    .footer__col h4 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-secondary); margin-bottom: var(--spacing-md); }
+    .footer__links { display: flex; flex-direction: column; gap: 10px; }
+    .footer__links a { font-size: 0.85rem; color: rgba(250,247,242,0.55); transition: color var(--transition); }
+    .footer__links a:hover { color: var(--color-secondary); }
+    .footer__contact-item { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: rgba(250,247,242,0.55); margin-bottom: 10px; transition: color var(--transition); }
+    .footer__contact-item:hover { color: rgba(250,247,242,0.85); }
+    .footer__contact-item svg { width: 15px; height: 15px; stroke: var(--color-secondary); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .footer__bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: var(--spacing-md); display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-md); flex-wrap: wrap; }
+    .footer__bottom p { font-size: 0.78rem; color: rgba(250,247,242,0.35); }
+    .footer__bottom-links { display: flex; gap: var(--spacing-md); }
+    .footer__bottom-links a { font-size: 0.78rem; color: rgba(250,247,242,0.35); transition: color var(--transition); }
+    .footer__bottom-links a:hover { color: var(--color-secondary); }
+
+    /* MOBILE NAV */
+    .nav__mobile-menu { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(28,15,8,0.98); flex-direction: column; align-items: center; justify-content: center; gap: var(--spacing-lg); }
+    .nav__mobile-menu.open { display: flex; }
+    .nav__mobile-menu a { font-family: var(--font-display); font-size: 1.75rem; font-weight: 600; color: var(--color-bg); transition: color var(--transition); }
+    .nav__mobile-menu a:hover, .nav__mobile-menu a.nav__current { color: var(--color-secondary); }
+    .nav__mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; color: rgba(250,247,242,0.7); font-size: 2rem; background: none; border: none; cursor: pointer; line-height: 1; }
+
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(10,5,2,0.95); align-items: center; justify-content: center; }
+    .lightbox.open { display: flex; }
+    .lightbox__img { max-width: 90vw; max-height: 88vh; object-fit: contain; border-radius: 4px; user-select: none; }
+    .lightbox__btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; width: 48px; height: 48px; border-radius: 50%; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background var(--transition); backdrop-filter: blur(8px); }
+    .lightbox__btn:hover { background: rgba(255,255,255,0.22); }
+    .lightbox__prev { left: 1.5rem; }
+    .lightbox__next { right: 1.5rem; }
+    .lightbox__close { position: absolute; top: 1.25rem; right: 1.5rem; background: none; border: none; color: rgba(255,255,255,0.7); font-size: 2rem; cursor: pointer; line-height: 1; transition: color var(--transition); }
+    .lightbox__close:hover { color: #fff; }
+    .lightbox__counter { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); font-size: 0.75rem; color: rgba(255,255,255,0.45); letter-spacing: 0.1em; }
+
+    @media (max-width: 900px) {
+      .nav__links { display: none; }
+      .nav__hamburger { display: flex; }
+      .transp-a__grid { grid-template-columns: 1fr; }
+      .transp-chart__wrap { flex-direction: column; align-items: flex-start; }
+      .prensa-grid { grid-template-columns: 1fr 1fr; }
+      .retrib-grid { columns: 2; }
+      .footer__grid { grid-template-columns: 1fr 1fr; }
+      .footer__brand { grid-column: 1 / -1; max-width: 100%; }
+    }
+    @media (max-width: 480px) {
+      .prensa-grid { grid-template-columns: 1fr; }
+      .retrib-grid { columns: 1; }
+      .footer__grid { grid-template-columns: 1fr; }
+      .footer__bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MOBILE MENU -->
+  <nav class="nav__mobile-menu" id="mobileMenu" role="dialog" aria-label="Menú de navegación móvil">
+    <button class="nav__mobile-close" id="mobileClose" aria-label="Cerrar menú">&times;</button>
+    <a href="index.html#quienes-somos" class="mobile-link">Quiénes Somos</a>
+    <a href="index.html#programas" class="mobile-link">Programas</a>
+    <a href="index.html#impacto" class="mobile-link">Impacto</a>
+    <a href="transparencia.html" class="mobile-link nav__current">Transparencia</a>
+    <a href="index.html#unete" class="mobile-link">Únete</a>
+  </nav>
+
+  <!-- NAV -->
+  <header class="nav" id="mainNav" role="banner">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo" aria-label="Casa Talamantes — Inicio">
+          <img src="Talamantes-logo.svg" alt="" class="nav__logo-img" aria-hidden="true">
+        </a>
+        <nav role="navigation" aria-label="Navegación principal">
+          <ul class="nav__links">
+            <li><a href="index.html#quienes-somos">Quiénes Somos</a></li>
+            <li><a href="index.html#programas">Programas</a></li>
+            <li><a href="index.html#impacto">Impacto</a></li>
+            <li><a href="transparencia.html" class="nav__current">Transparencia</a></li>
+            <li><a href="index.html#unete" class="nav__cta">Conviértete en Aliado</a></li>
+          </ul>
+        </nav>
+        <button class="nav__hamburger" id="navHamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero" aria-label="Encabezado de página">
+    <div class="page-hero__bg"></div>
+    <div class="container page-hero__content fade-in">
+      <div class="page-hero__label">Casa Talamantes</div>
+      <h1 class="page-hero__title">Impacto y<br><em>Transparencia</em></h1>
+      <p class="page-hero__sub">Rendición de cuentas, retribución social y noticias del proyecto para donantes institucionales y la ciudadanía.</p>
+    </div>
+  </section>
+
+  <main>
+
+    <!-- TRANSPARENCIA SECTION -->
+    <section class="transparencia section section--warm" id="transparencia" aria-labelledby="transpTitle">
+      <div class="container">
+
+        <div class="transparencia__intro fade-in">
+          <div class="section-label">Impacto y Transparencia</div>
+          <h2 class="transparencia__section-title" id="transpTitle">Rendición de cuentas,<br><em>en cada paso</em></h2>
+          <p class="transparencia__section-body">Creemos que la confianza se construye con evidencia. Aquí compartimos abiertamente el uso de los recursos, el impacto social generado y las noticias más recientes de Casa Talamantes.</p>
+        </div>
+
+        <!-- A. Transparencia y Rendición de Cuentas -->
+        <div class="transp-module fade-in">
+          <div class="transp-module__head">
+
+            <span class="transp-module__title">Transparencia y Rendición de Cuentas</span>
+            <span class="transp-module__sub">Repositorio oficial de documentos</span>
+          </div>
+          <div class="transp-a__grid">
+            <div>
+              <div class="transp-a__col-title">Informes financieros disponibles</div>
+              <a class="transp-doc-btn" href="Reportes/Mantenimiento del inmueble (1).pdf" download="Informe Anual de Actividades 2023.pdf">
+                <div class="transp-doc-btn__icon">
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div class="transp-doc-btn__info">
+                  <div class="transp-doc-btn__name">Informe Anual de Actividades 2023</div>
+                  <div class="transp-doc-btn__meta">PDF · Asoc. Javier Francisco Máynez A.C.</div>
+                </div>
+                <div class="transp-doc-btn__dl">
+                  <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </div>
+              </a>
+              <div class="transp-doc-btn">
+                <div class="transp-doc-btn__icon">
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div class="transp-doc-btn__info">
+                  <div class="transp-doc-btn__name">Informe de Avance — Primer Semestre 2024</div>
+                  <div class="transp-doc-btn__meta">PDF · Asoc. Javier Francisco Máynez A.C.</div>
+                </div>
+                <div class="transp-doc-btn__dl">
+                  <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </div>
+              </div>
+              <div class="transp-doc-btn">
+                <div class="transp-doc-btn__icon">
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div class="transp-doc-btn__info">
+                  <div class="transp-doc-btn__name">Estados Financieros Auditados 2022</div>
+                  <div class="transp-doc-btn__meta">PDF · Asoc. Javier Francisco Máynez A.C.</div>
+                </div>
+                <div class="transp-doc-btn__dl">
+                  <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </div>
+              </div>
+              <p class="transp-doc-note">* Los documentos se publicarán en cuanto sean formalizados por la asociación.</p>
+            </div>
+            <div>
+              <div class="transp-a__col-title">Destino de los recursos</div>
+              <div class="transp-chart__wrap">
+                <svg class="transp-donut" viewBox="0 0 200 200" aria-label="Distribución de recursos">
+                  <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(0,0,0,0.07)" stroke-width="28"/>
+                  <circle cx="100" cy="100" r="70" fill="none" stroke="#8B4513" stroke-width="28"
+                    stroke-dasharray="241.90 439.82" stroke-dashoffset="0"
+                    transform="rotate(-90 100 100)"/>
+                  <circle cx="100" cy="100" r="70" fill="none" stroke="#D4A853" stroke-width="28"
+                    stroke-dasharray="109.96 439.82" stroke-dashoffset="-241.90"
+                    transform="rotate(-90 100 100)"/>
+                  <circle cx="100" cy="100" r="70" fill="none" stroke="#2C5F2E" stroke-width="28"
+                    stroke-dasharray="87.96 439.82" stroke-dashoffset="-351.86"
+                    transform="rotate(-90 100 100)"/>
+                  <text x="100" y="96" text-anchor="middle" font-size="22" font-weight="700" fill="#1A1A1A" font-family="Georgia,serif">100%</text>
+                  <text x="100" y="113" text-anchor="middle" font-size="10" fill="#5A5047" font-family="system-ui,sans-serif">Transparente</text>
+                </svg>
+                <div class="transp-legend">
+                  <div class="transp-legend__item">
+                    <div class="transp-legend__dot" style="background:#8B4513"></div>
+                    <span class="transp-legend__label">Infraestructura física</span>
+                    <span class="transp-legend__pct">55%</span>
+                  </div>
+                  <div class="transp-legend__item">
+                    <div class="transp-legend__dot" style="background:#D4A853"></div>
+                    <span class="transp-legend__label">Equipamiento tecnológico</span>
+                    <span class="transp-legend__pct">25%</span>
+                  </div>
+                  <div class="transp-legend__item">
+                    <div class="transp-legend__dot" style="background:#2C5F2E"></div>
+                    <span class="transp-legend__label">Programas educativos</span>
+                    <span class="transp-legend__pct">20%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- B. Retribución Social en Acción -->
+        <div class="transp-module fade-in">
+          <div class="transp-module__head">
+
+            <span class="transp-module__title">Retribución Social en Acción</span>
+            <span class="transp-module__sub">Beneficio social directo para la comunidad</span>
+          </div>
+          <div class="retrib-tabs" role="tablist">
+            <button class="retrib-tab active" role="tab" data-panel="0">Retribución Social</button>
+            <button class="retrib-tab" role="tab" data-panel="1">Eventos y Talleres</button>
+          </div>
+
+          <div class="retrib-panel active" data-panel="0">
+            <p class="retrib-panel__intro">Coordinación logística y entrega de equipamiento e insumos a organismos de protección civil, grupos comunitarios y ligas deportivas juveniles del municipio.</p>
+            <div class="retrib-grid">
+              <div class="retrib-grid__item"><img src="retribucion-social/retribucion-social/apoyos-01.png" alt="Apoyos comunitarios"></div>
+              <div class="retrib-grid__item"><img src="retribucion-social/retribucion-social/apoyos-02.png" alt="Apoyos comunitarios"></div>
+              <div class="retrib-grid__item"><img src="retribucion-social/retribucion-social/apoyos-04.png" alt="Apoyos comunitarios"></div>
+              <div class="retrib-grid__item"><img src="retribucion-social/retribucion-social/apoyos-05.png" alt="Apoyos comunitarios"></div>
+              <div class="retrib-grid__item"><img src="retribucion-social/retribucion-social/Apoyos7.jpeg" alt="Deporte local"></div>
+              <div class="retrib-grid__item"><img src="retribucion-social/retribucion-social/Apoyos8.jpg" alt="Deporte local"></div>
+              <div class="retrib-grid__item"><img src="retribucion-social/retribucion-social/Apoyos9.png" alt="Deporte local"></div>
+            </div>
+          </div>
+
+          <div class="retrib-panel" data-panel="1">
+            <p class="retrib-panel__intro">Actividades recreativas y formativas organizadas en Casa Talamantes: talleres artesanales, proyecciones culturales y visitas académicas que convierten el espacio en un núcleo vivo de la comunidad.</p>
+            <div class="retrib-event-section">
+              <div class="retrib-event-section__title">Taller "Pintando con cal"</div>
+              <div class="retrib-grid">
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-cal/cal-01.png" alt="Taller pintando con cal"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-cal/cal-02.png" alt="Taller pintando con cal"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-cal/cal-3.png" alt="Taller pintando con cal"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-cal/cal-4.jpg" alt="Taller pintando con cal"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-cal/cal-5.png" alt="Taller pintando con cal"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-cal/cal-6.png" alt="Taller pintando con cal"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-cal/cal-7.png" alt="Taller pintando con cal"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-cal/cal-8.png" alt="Taller pintando con cal"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-cal/pincal9.png" alt="Taller pintando con cal"></div>
+              </div>
+            </div>
+            <div class="retrib-event-section">
+              <div class="retrib-event-section__title">Taller "Construyendo con tierra"</div>
+              <div class="retrib-grid">
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-tierra/tierra-01.png" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-tierra/tierra-02.png" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-tierra/tierra-03.png" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-tierra/tierra-04.png" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-tierra/tierra-05.jpg" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-tierra/tierra-06.jpg" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-tierra/tierra-07.png" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-tierra/tierra-08.jpg" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-tierra/tierra-09.jpg" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-tierra/tierra-10.png" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-tierra/tierra-12.jpg" alt="Taller construyendo con tierra"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/taller-tierra/tierra-14.png" alt="Taller construyendo con tierra"></div>
+
+              </div>
+            </div>
+            <div class="retrib-event-section">
+              <div class="retrib-event-section__title">Visita: Diplomado de Gestión del Patrimonio Cultural y Arquitecturas del Norte de México</div>
+              <div class="retrib-grid">
+                <div class="retrib-grid__item"><img src="retribucion-social/visita-diplomado/tec-01.jpg" alt="Visita diplomado patrimonio"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/visita-diplomado/tec-02.jpg" alt="Visita diplomado patrimonio"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/visita-diplomado/tec-03.jpg" alt="Visita diplomado patrimonio"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/visita-diplomado/tec-04.jpg" alt="Visita diplomado patrimonio"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/visita-diplomado/tec-05.jpg" alt="Visita diplomado patrimonio"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/visita-diplomado/tec-06.jpg" alt="Visita diplomado patrimonio"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/visita-diplomado/tec-07.jpg" alt="Visita diplomado patrimonio"></div>
+                <div class="retrib-grid__item"><img src="retribucion-social/visita-diplomado/tec-08.jpg" alt="Visita diplomado patrimonio"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- C. Actualidad y Sala de Prensa -->
+        <div class="transp-module fade-in">
+          <div class="transp-module__head">
+
+            <span class="transp-module__title">Actualidad y Sala de Prensa</span>
+            <span class="transp-module__sub">Últimas noticias del proyecto</span>
+          </div>
+          <div class="prensa-grid">
+            <div class="prensa-card">
+              <div class="prensa-card__thumb">
+                <img src="Fotos/blog-1.png" alt="Arrancan los trabajos de planeación para la nueva fase de inversión de $17 millones">
+              </div>
+              <div class="prensa-card__body">
+                <div class="prensa-card__date">10 Jun 2025</div>
+                <h4 class="prensa-card__title">Arrancan los trabajos de planeación para la nueva fase de inversión de $17 millones</h4>
+                <a href="#" class="prensa-card__btn">Leer más <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+              </div>
+            </div>
+            <div class="prensa-card">
+              <div class="prensa-card__thumb">
+                <img src="Fotos/blog-2.png" alt="Secretaría de Cultura reconoce preservación patrimonial de Casa Talamantes">
+              </div>
+              <div class="prensa-card__body">
+                <div class="prensa-card__date">15 Mar 2025</div>
+                <h4 class="prensa-card__title">Secretaría de Cultura reconoce preservación patrimonial de Casa Talamantes a través del Programa Eká</h4>
+                <a href="#" class="prensa-card__btn">Leer más <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+              </div>
+            </div>
+            <div class="prensa-card">
+              <div class="prensa-card__thumb">
+                <img src="Fotos/blog-3.png" alt="Más de 80 niños participan en los talleres educativos del primer semestre 2025">
+              </div>
+              <div class="prensa-card__body">
+                <div class="prensa-card__date">20 Ene 2025</div>
+                <h4 class="prensa-card__title">Más de 80 niños participan en los talleres educativos del primer semestre 2025</h4>
+                <a href="#" class="prensa-card__btn">Leer más <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+              </div>
+            </div>
+          </div>
+          <p class="prensa-note">* Las notas de prensa serán actualizadas periódicamente por el equipo de comunicación de Casa Talamantes.</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo-title">Casa Talamantes</div>
+          <div class="footer__logo-sub">Asoc. Javier Francisco Máynez A.C.</div>
+          <p class="footer__tagline">Educación, cultura y esperanza para los niños y jóvenes del Municipio de Allende, Chihuahua. Fundada en 2019.</p>
+          <p style="font-size:0.75rem;color:rgba(250,247,242,0.25);margin-top:var(--spacing-xs);">Asociación Civil · Sin fines de lucro · JFMAC</p>
+        </div>
+        <div class="footer__col">
+          <h4>Navegación</h4>
+          <ul class="footer__links">
+            <li><a href="index.html#quienes-somos">Quiénes Somos</a></li>
+            <li><a href="index.html#programas">Programas</a></li>
+            <li><a href="index.html#impacto">Impacto y Metas</a></li>
+            <li><a href="transparencia.html">Transparencia</a></li>
+            <li><a href="index.html#unete">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Contacto</h4>
+          <a href="mailto:Info@javierfranciscomaynez.org" class="footer__contact-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Info@javierfranciscomaynez.org
+          </a>
+          <a href="tel:+525565881725" class="footer__contact-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.44 2 2 0 0 1 3.57 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            55 6588 1725
+          </a>
+          <a href="https://javierfranciscomaynez.org" target="_blank" rel="noopener noreferrer" class="footer__contact-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            javierfranciscomaynez.org
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=100071658002873" target="_blank" rel="noopener noreferrer" class="footer__contact-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true" style="fill:var(--color-secondary);stroke:none;"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            Casa Talamantes en Facebook
+          </a>
+          <p class="footer__contact-item" style="cursor:default;">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Talamantes, Allende, Chihuahua
+          </p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 Asociación Javier Francisco Máynez A.C. Todos los derechos reservados.</p>
+        <div class="footer__bottom-links">
+          <a href="mailto:Info@javierfranciscomaynez.org">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Cerrar">&times;</button>
+    <button class="lightbox__btn lightbox__prev" id="lightboxPrev" aria-label="Anterior">&#8249;</button>
+    <img class="lightbox__img" id="lightboxImg" src="" alt="">
+    <button class="lightbox__btn lightbox__next" id="lightboxNext" aria-label="Siguiente">&#8250;</button>
+    <span class="lightbox__counter" id="lightboxCounter"></span>
+  </div>
+
+  <script>
+    // NAV SCROLL
+    const mainNav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      mainNav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // MOBILE MENU
+    const hamburger = document.getElementById('navHamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileClose = document.getElementById('mobileClose');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    function openMenu() { mobileMenu.classList.add('open'); hamburger.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+    function closeMenu() { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+    hamburger.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
+    mobileClose.addEventListener('click', closeMenu);
+    mobileLinks.forEach(l => l.addEventListener('click', closeMenu));
+    mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) closeMenu(); });
+
+    // FADE IN
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); fadeObserver.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+    // RETRIBUCIÓN SOCIAL TABS
+    const retribTabs   = document.querySelectorAll('.retrib-tab');
+    const retribPanels = document.querySelectorAll('.retrib-panel');
+    retribTabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        retribTabs.forEach(t => t.classList.remove('active'));
+        retribPanels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        retribPanels[i].classList.add('active');
+      });
+    });
+
+    // LIGHTBOX
+    const lightbox        = document.getElementById('lightbox');
+    const lightboxImg     = document.getElementById('lightboxImg');
+    const lightboxCounter = document.getElementById('lightboxCounter');
+    let lbImages = [], lbIndex = 0;
+    function openLightbox(srcs, i) { lbImages = srcs; lbIndex = i; lightboxImg.src = lbImages[lbIndex]; lightboxCounter.textContent = (lbIndex+1)+' / '+lbImages.length; lightbox.classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow=''; }
+    function lbMove(dir) { lbIndex = (lbIndex+dir+lbImages.length)%lbImages.length; lightboxImg.src = lbImages[lbIndex]; lightboxCounter.textContent = (lbIndex+1)+' / '+lbImages.length; }
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    document.getElementById('lightboxPrev').addEventListener('click', () => lbMove(-1));
+    document.getElementById('lightboxNext').addEventListener('click', () => lbMove(1));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key==='ArrowLeft') lbMove(-1);
+      if (e.key==='ArrowRight') lbMove(1);
+      if (e.key==='Escape') closeLightbox();
+    });
+
+    // Bind lightbox per event section / panel
+    document.querySelectorAll('.retrib-event-section, .retrib-panel[data-panel="0"], .retrib-panel[data-panel="1"]').forEach(group => {
+      const imgs = Array.from(group.querySelectorAll('.retrib-grid__item img'));
+      const srcs = imgs.map(img => img.src);
+      imgs.forEach((img, i) => { img.style.cursor='pointer'; img.addEventListener('click', () => openLightbox(srcs, i)); });
+    });
+  </script>
+</body>
+</html>
