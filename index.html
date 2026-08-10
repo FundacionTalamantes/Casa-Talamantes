@@ -2757,6 +2757,7 @@
                     <div class="form-error" id="errorMensaje">Por favor escribe un mensaje.</div>
                   </div>
                   <button type="submit" class="form-submit" id="formSubmitBtn">Enviar mensaje</button>
+                  <div class="form-error" id="formSubmitError" style="margin-top:12px;">No se pudo enviar tu mensaje. Intenta de nuevo o escríbenos a info@javierfranciscomaynez.org.</div>
                 </form>
               </div>
               <div class="form-success" id="formSuccess" role="status" aria-live="polite">
@@ -2920,6 +2921,7 @@
     const formSuccess = document.getElementById('formSuccess');
     const formContent = document.getElementById('formContent');
     const submitBtn = document.getElementById('formSubmitBtn');
+    const formSubmitError = document.getElementById('formSubmitError');
 
     function showError(fieldId, errorId, show) {
       const field = document.getElementById(fieldId);
@@ -2944,7 +2946,7 @@
       el.addEventListener('change', () => el.classList.remove('error'));
     });
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const nombre = document.getElementById('fieldNombre').value.trim();
@@ -2972,14 +2974,26 @@
 
       if (!valid) return;
 
-      // Simulate submission
+      formSubmitError.classList.remove('visible');
       submitBtn.disabled = true;
       submitBtn.textContent = 'Enviando...';
 
-      setTimeout(() => {
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre, apellido, email, tipo, mensaje }),
+        });
+
+        if (!response.ok) throw new Error('Request failed');
+
         formContent.style.display = 'none';
         formSuccess.classList.add('visible');
-      }, 900);
+      } catch (err) {
+        formSubmitError.classList.add('visible');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar mensaje';
+      }
     });
 
     // =====================
